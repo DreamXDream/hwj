@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title></title>
+
+	<link href="bootstrap.css" rel="stylesheet" />
+
+	<link href="font-awesome.css" rel="stylesheet" />
+
+	<link href="assets/css/custom-styles.css" rel="stylesheet" />
+
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+		  rel='stylesheet' type='text/css' />
+
+	<script src="jquery-1.9.1.js"></script>
+
+	<script src="bootstrap.min.js"></script>
+
+	<script src="jquery.metisMenu.js"></script>
+	<script src="//imgcache.qq.com/open/qcloud/js/vod/sdk/ugcUploader.js"></script>
+
+	<style>
+		boay, html {
+			padding: 0;
+			margin: auto;
+		}
+
+		.container {
+			margin-top: 50px;
+		}
+
+
+
+		#Operson .col-md-3 {
+			border: 1px solid transparent;
+			margin-left: 15px;
+			margin-top: 15px;
+			margin-bottom: 25px;
+		}
+
+		#page-wrapper {
+			overflow: hidden;
+			background-attachment: fixed;
+			background-image: url(../images/console.jpg);
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+			-moz-background-size: 100% 100%;
+		}
+
+		#video-up {
+			display: none;
+		}
+		#lesson .col-md-3:hover {
+			cursor: pointer;
+		}
+
+		#lesson .col-md-3 img {
+			width: 100%;
+			height: 140px;
+			position: relative;
+		}
+		#lesson .col-md-3  {
+			margin-top: 35px;
+		}
+
+		#lesson .col-md-3 div {
+			position: absolute;
+			background: rgba(0, 0, 0, 0.4);
+			top: 120px;
+			right: 15px;
+			color: white;
+		}
+
+		#lesson .col-md-3 h1 {
+			overflow: hidden;
+			font-size: 20px;
+			line-height: 25px;
+			display:inline-block;
+			width:100%;
+			height:25px;
+			color: black;
+
+
+		}
+
+		#lesson .col-md-3 h1:hover {
+			color: blue;
+			cursor: pointer
+		}
+		.col-md-3 span:nth-child(3) {
+			opacity: 0.1;
+			right: 15px;
+			position: absolute;
+			font-size: 25px;
+		}
+
+		.col-md-3 span:nth-child(3):hover {
+			cursor: pointer;
+			opacity: 1;
+		}
+
+	</style>
+</head>
+<body>
+<div id="wrapper">
+	<nav class="navbar navbar-default top-navbar"
+		 style="background-color: grey;" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+				<input id="adminsession" type="hidden"></button>
+			</button>
+			<a class="navbar-brand" href="#"><i class="fa fa-comments"></i>
+				<strong id="welcome"></strong></a>
+		</div>
+
+		<ul class="nav navbar-top-links navbar-right">
+
+
+			<li class="dropdown"><a class="dropdown-toggle"
+									data-toggle="dropdown" href="#" aria-expanded="false"> <i
+					class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-alerts">
+					<li><a href="#">
+						<div>
+							<i class="fa fa-comment fa-fw"></i> 课程
+
+						</div>
+					</a></li>
+
+					<li class="divider"></li>
+					<li><a href="#">
+						<div>
+							<i class="fa fa-envelope fa-fw"></i> 视频
+
+						</div>
+					</a></li>
+
+
+
+
+				</ul> <!-- /.dropdown-alerts --></li>
+			<!-- /.dropdown -->
+			<li class="dropdown"><a class="dropdown-toggle"
+									data-toggle="dropdown" href="#" aria-expanded="false"> <i
+					class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+			</a>
+				<ul class="dropdown-menu dropdown-user">
+
+					<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+					</li>
+					<li class="divider"></li>
+					<li><a href="#"><i class="fa fa-sign-out fa-fw"></i>
+						Logout</a></li>
+				</ul> <!-- /.dropdown-user --></li>
+			<!-- /.dropdown -->
+		</ul>
+	</nav>
+	<!--/. NAV TOP  -->
+	<nav class="navbar-default navbar-side" role="navigation">
+		<div class="sidebar-collapse">
+			<ul id="list" class="nav" id="main-menu">
+
+				<li><a href="#"><i class="fa fa-dashboard"></i> 个人中心</a></li>
+
+				<li><a href="#"><i class="fa fa-desktop"></i> 上传视频</a></li>
+				<li><a href="#"><i class="fa fa-bar-chart-o"></i> 查看视频</a></li>
+				<li><a href="#"><i class="fa fa-qrcode"></i> 管理员添加 </a></li>
+				<li><a href="#"><i class="fa fa-qrcode"></i> 管理员查看</a></li>
+				<li><a href="#"><i class="fa fa-qrcode"></i> 管理员修改</a></li>
+				<li id="ebackstage"><a href="#"><i
+						class="fa fa-fw fa-file"></i>退出</a></li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<!-- /. NAV SIDE  -->
+<div id="page-wrapper">
+	<div id="video-up" style="margin-top: 50px;" class="container">
+		<div id="formsub"  enctype="multipart/form-data"
+			 role="form">
+			<div class="form-group">
+				<label for="name">名称</label> <input name="text" type="text"
+													class="form-control" id="name" placeholder="请输入名称">
+			</div>
+			<video style="display:none;" controls="controls" id="aa" oncanplaythrough="myFunction(this)">
+			</video>
+			<div class="form-group">
+				<label for="uploadImgNow-file">图片路径</label> <input type="file" name="file"
+																   id="uploadImgNow-file" > <br> <label for="uploadVideoNow-file">视频路径</label>
+
+				<input type="file" id="uploadVideoNow-file"   name="videofile">
+				<input  style="display: none;" type="text" name="vtime" value=""  id="getDuration"/>
+				<p class="help-block">请确认上传的格式正确。</p>
+			</div>
+			<div class="checkbox">
+				<label> <input type="checkbox">请打勾
+				</label>
+			</div>
+			<button id="subv">上传视频</button>
+			<input id="time" type="hidden" value="">
+
+		</div>
+	</div>
+
+
+	<div id="lesson" style="display: none;" class="container"></div>
+
+	<div id="person" style="display: none;" class="container">
+
+		<div class="form-horizontal">
+			<div class="page-header">
+				<h1 style="color: white" class="text-center">添加管理员</h1>
+			</div>
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">用户名:</lable>
+				<div class="col-sm-8 has-success has-feedback">
+
+					<input type="text" id="username" name="username"
+						   placeholder="Input your account" class="form-control"> <span
+						class="glyphicon glyphicon-user form-control-feedback"></span>
+
+				</div>
+			</div>
+
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+				<div class="col-sm-8 has-warning has-feedback">
+
+					<input name="password" id="password" type="text"
+						   placeholder="Input your password" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+
+				</div>
+			</div>
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+				<div class="col-sm-8 has-error has-feedback">
+
+
+					<input id="password1" name="password1" type="text"
+						   placeholder="Input your password" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+
+				</div>
+			</div>
+			<div style="margin-top: 40px; margin-left: -60px;"
+				 class="form-group  text-center">
+				<input id="up" type="submit" name="sub" style="width: 120px"
+					   value="OK" class="btn btn-primary"> <input type="button"
+																  style="margin-left: 30px; width: 120px" value="Cancel"
+																  class="btn btn-primary">
+			</div>
+		</div>
+	</div>
+
+	<div id="check" style="display: none; margin-top: 100px;"
+		 class="container">
+		<div class="page-header">
+			<h1 style="color: white" class="text-center">查看管理员</h1>
+		</div>
+
+		<table id="table" class="table table-bordered table-hover ">
+			<tr>
+				<td>ID</td>
+				<td>用户名</td>
+				<td>密码</td>
+				<td></td>
+			</tr>
+
+		</table>
+	</div>
+
+
+	<div id="updata" class="container" style="display: none;">
+
+		<div class="form-horizontal">
+
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">ID:</lable>
+				<div class="col-sm-8 has-warning has-feedback">
+
+					<input readonly="readonly" value="" name="id" id="id" type="text"
+						   placeholder="Input your password" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+
+				</div>
+			</div>
+
+
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">用户名:</lable>
+				<div class="col-sm-8 has-warning has-feedback">
+
+					<input value="" name="username" id="dusername" type="text"
+						   placeholder="Input your password" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+
+				</div>
+			</div>
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+				<div class="col-sm-8 has-error has-feedback">
+
+
+					<input value="" id="dpassword" name="password" type="text"
+						   placeholder="Input your password" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+
+				</div>
+			</div>
+			<div style="margin-top: 40px; margin-left: -60px;"
+				 class="form-group  text-center">
+				<input id="sub" type="submit" name="sub" style="width: 120px"
+					   value="确定" class="btn btn-primary"> <input type="button"
+																  style="margin-left: 30px; width: 120px" value="取消"
+																  class="btn btn-primary">
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+<!-- /. WRAPPER  -->
+</body>
+</html>
+<script>
+    window.onload = function() {
+        var operson = document.getElementById('person');
+        var Olist = document.getElementById('list');
+        var Oli = Olist.getElementsByTagName('li');
+        var Ovideo = document.getElementById('video-up');
+        var olesson = document.getElementById('lesson');
+        var ocheck = document.getElementById('check');
+        var oupdata = document.getElementById('updata');
+        var oebackstage = document.getElementById('ebackstage');
+        for (var i = 0; i < Oli.length; i++) {
+            Oli[i].index = i;
+
+            Oli[i].onclick = function() {
+                var b = this.index;
+                Ovideo.style.display = 'none';
+                olesson.style.display = 'none';
+                operson.style.display = 'none';
+                ocheck.style.display = 'none';
+                oupdata.style.display = 'none';
+                if (b == 1) {
+                    Ovideo.style.display = 'block';
+                }
+                if (b == 2) {
+
+                    olesson.style.display = 'block';
+                }
+                if (b == 3 && $("#adminsession").val()=='admin') {
+                    operson.style.display = 'block';
+                }
+                if (b == 3 && $("#adminsession").val()!='admin') {
+                    operson.style.display = 'none';
+                    alert("权限不够！！！");
+                }
+
+                if (b == 4) {
+                    ocheck.style.display = 'block';
+                }
+            };
+
+        }
+
+        $.ajax({
+            url : "User/getadminsession.do",
+            type : "post",
+            success : function(data) {
+                alert(data);
+                $("#welcome").html("Hi!" + data);
+
+                $("#adminsession").val(data);
+            },
+            error : function(data) {
+                alert("接收不到");
+            }
+
+        });
+
+        //查看视频
+        var Olesson = document.getElementById('lesson');
+        $.ajax({
+            url : 'User/video.do',
+            type : "post",
+            dataType : "json",
+            async : false,
+            success : function(data) {
+
+                for (var i = 0; i < data.length; i++) {
+                    str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                        + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                        + "<div  class='pull-right'>&nbsp;"
+                        + data[i]['vtime']
+                        + "&nbsp;</div>"
+                        + "<span  class='glyphicon glyphicon-remove pull-right'></span>"
+                        + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                        + data[i]['text'] + "</h1>" + "</div>";
+                    $("#lesson").append(str);
+
+                }
+
+            }
+        });
+
+        var Ocol = Olesson.getElementsByClassName('col-md-3');
+        var Ospan = Olesson.getElementsByTagName('span');
+        var txt;
+        for (var i = 0; i < Ospan.length; i++) {
+            Ocol[i].index = i;
+            Ospan[i].index = i;
+            Ospan[i].onclick = function() {
+
+                var h = this.index;
+                txt = $(Ocol[h]).find("h1").html();
+                alert(txt);
+                var msg = "是否删除视频？";
+                if (confirm(msg) == true) {
+                    $.ajax({
+                        url : 'User/deleteVideo.do',
+                        type : "post",
+                        data : {
+                            "txt" : txt
+                        },
+                        async : false,
+                        success : function(data) {
+                            alert("success to delete!");
+                            window.location.reload();
+                        },
+                        error : function(data) {
+                            alert("collect不到");
+                        }
+                    });
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        //admin查看
+        var otable = document.getElementById('table');
+        $
+            .ajax({
+                url : 'User/getadmin.do',
+                type : "post",
+                dataType : "json",
+                async : false,
+                success : function(data) {
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        str = "<tr><td class='id'>"
+                            + data[i]['id']
+                            + "</td><td>"
+                            + data[i]['username']
+                            + "</td><td>"
+                            + data[i]['password']
+                            + "</td><td><input type='button' class='btn btn-primary'name='updata' value='修改'><input name='delete' value='删除' type='button' style='margin-left:40px;' class='btn btn-danger' name='delete' ></td></tr>";
+
+                        $("#table").append(str);
+
+                    }
+
+                }
+            });
+        //删除admin
+
+        var odelete = otable.getElementsByClassName('bth bth-danger');
+        var otr = otable.getElementsByTagName('tr');
+
+        //jquery无敌  垃圾js
+        $("input[name='delete']")
+            .each(
+                function() {
+                    var currentEle = $(this);
+
+                    currentEle
+                        .click(function() {
+                            if($("#adminsession").val()!="admin"){
+                                alert("权限不够！！！！");
+                            }
+                            else{
+
+
+                                var id = $(this).parent().parent()
+                                    .find("td:eq(0)").text()//获取点击的input的上一个元素的上一个元素;无敌
+
+                                $
+                                    .ajax({
+                                        url : "User/deleteadmin.do",
+                                        type : "post",
+                                        data : {
+                                            "id" : id
+
+                                        },
+                                        async : false,
+                                        success : function(data) {
+                                            console.log(data);
+                                            if (data == 'Yes') {
+                                                alert("删除成功");
+                                                window.location.href = "backstage.html";
+                                            }
+                                        }
+                                    });
+                            }
+                        });
+                });
+
+        //修改admin
+
+        var dusername = document.getElementById('dusername');
+        var dpassword = document.getElementById('dpassword');
+        var oupdata = document.getElementById('updata');
+        var osub = document.getElementById('sub');
+        var oid = document.getElementById('id');
+        $("input[name='updata']").each(function() {
+            var currentEle = $(this);
+
+            currentEle.click(function() {
+                if($("#adminsession").val()!="admin"){
+                    alert("权限不够！！！！");
+                }
+                else {
+
+
+                    var id = $(this).parent().parent().find("td:eq(0)").text()//获取点击的input的上一个元素的上一个元素;无敌
+
+                    $.ajax({
+                        url : "User/updataadmin.do",
+                        type : "post",
+                        data : {
+                            "id" : id
+
+                        },
+                        async : false,
+                        success : function(data) {
+                            for (var i = 0; i < data.length; i++) {
+                                oid.value = data[i]['id'];
+                                dusername.value = data[i]['username'];
+                                dpassword.value = data[i]['password'];
+
+                            }
+                        }
+                    });
+                    oupdata.style.display = 'block';
+                    Ovideo.style.display = 'none';
+                    olesson.style.display = 'none';
+                    operson.style.display = 'none';
+                    ocheck.style.display = 'none';
+
+                }
+            });
+
+        });
+        osub.onclick = function() {
+
+            var findusername = dusername.value;
+            var findpassword = dpassword.value;
+            var findid = oid.value;
+            $
+                .ajax({
+                    url : "User/updataadmin1.do",
+                    type : "post",
+                    data : {
+                        "findid" : findid,
+                        "findusername" : findusername,
+                        "findpassword" : findpassword
+
+                    },
+                    async : false,
+                    success : function(data) {
+                        console.log(data);
+                        if (data == 'Yes') {
+                            alert("更新成功");
+                            window.location.href = "../person.html";
+                        } else if (data == 'No') {
+
+                            alert("更新失败!存在相同用户");
+
+                        }
+                    }
+                });
+
+        };
+        //添加admin
+        var oup = document.getElementById('up');
+        oup.onclick = function() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var password1 = document.getElementById('password1').value;
+
+            $
+                .ajax({
+                    url : "User/admin.do",
+                    type : "post",
+                    data : {
+                        "username" : username,
+                        "password" : password,
+                        "password1" : password1
+
+                    },
+                    async : false,
+                    success : function(data) {
+                        console.log(data);
+                        if (data == 'No') {
+                            alert("存入失败");
+                        } else if (data == 'Yes') {
+                            alert("存入成功");
+                            window.location.href = "backstage.html";
+                        }
+                    }
+                });
+        };
+        /*
+                for (var i = 0; i < Odiv.length; i++) {
+                    var b = this.index;
+                    Odiv[i].onclick = function() {
+
+                        window.location.href = 'video.html';
+                    };
+
+                }
+                oebackstage.onclick = function() {
+
+                    window.location.href = 'home1.html';
+                };
+
+        */
+        var mysign="";
+        var getSignature = function(callback) {
+            $.ajax({
+                url : "User/shangchuan.do", //服务器获取客户端上传签名的URL
+                type : "POST",
+                success : function(result) {
+                    //result.returnData.signature为获取到的签名
+                    alert("success!"+result);
+                    mysign=result;
+                    console.log(result);
+                    callback(result);
+                    //callback(result.returnData.signature);
+                }
+            });
+        };
+        var imgFile;
+        var videoFile;
+        $('#uploadImgNow-file').on('change', function(e){
+            imgFile=this.files[0];
+        });
+        $('#uploadVideoNow-file').on('change', function(e){
+            videoFile = this.files[0];
+
+        });
+
+
+        // console.log(url);
+        $("#subv").click(function(){
+            var resultMsg = qcVideo.ugcUploader.start({
+                videoFile : videoFile,
+                coverFile: imgFile,//封面, 类型为 File
+                getSignature : getSignature,
+                allowAudio : 1,
+                isTranscode: 1,
+                error: function(result){
+                    console.log('上传失败的文件类型：' + result.type);
+                    console.log('上传失败的原因：' + result.msg);
+                },
+                progress: function(result){
+                    console.log('上传进度：' + result.curr);
+                },
+                finish: function(result){
+
+                    console.log('上传结果的 fileId：' + result.fileId);
+
+                    console.log('上传结果的视频名称：' + result.videoName);
+                    console.log('上传结果的视频地址：' + result.videoUrl);
+                    console.log('上传结果的封面名称：' + result.coverName);
+                    console.log('上传结果的封面地址：' + result.coverUrl);
+                    var text = document.getElementById('name').value;
+                    $.ajax({
+                        url : "User/addImg.do",
+                        type : "post",
+                        data : {
+                            "text" : text,
+                            "vurl" : result.videoUrl,
+                            "murl" : result.coverUrl,
+                            "videoid":result.fileId
+                        },
+                        async : false,
+                        success : function(data) {
+                            if (data == 'Yes') {
+                                alert("上传成功!");
+                                window.location.href = "backstage.html";
+                            } else if (data == 'No') {
+                                alert("上传失败!");
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        oebackstage.onclick = function() {
+
+            window.location.href = '../home1.html';
+        };
+
+
+
+
+    };
+</script>

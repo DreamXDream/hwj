@@ -1,0 +1,1222 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="resource/bootstrap.css" />
+<script src="resource/jquery-1.9.1.js"></script>
+<script src="resource/bootstrap.js" ></script>
+    <script type="text/javascript" src="resource/jquery.params.js">   </script>
+<title>无标题文档</title>
+<style>
+html, body {
+	font-family: 微软雅黑;
+	height: 100%;
+	background-image: url(images/go.jpg);
+	background-repeat: no-repeat;
+	background-color: grey;
+	background-color: rgba(216, 216, 216, 0.3);
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.row {
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+.row div {
+	margin-top: 25px;
+}
+#lesson{
+    position:relative;
+}
+#lesson .container{
+    position:absolute
+    display:none;
+}
+
+#lesson .col-md-3 h1 {
+	overflow: hidden;
+	font-size: 20px;
+	line-height: 25px;
+    display:inline-block;
+    width:100%;
+    height:25px;
+}
+
+.col-md-3 h1:hover {
+	color: blue;
+	cursor: pointer
+}
+
+.col-md-3 img {
+	width: 100%;
+	height: 140px;
+	position: relative;
+}
+
+.col-md-3 div {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.4);
+	top: 95px;
+	right: 15px;
+	color: white;
+}
+
+#lesson div:hover {
+	cursor: pointer
+}
+
+.col-md-3 div:hover {
+	cursor: pointer
+}
+
+#top div a {
+	text-decoration: none;
+	font-size: 1.3em;
+}
+
+#top div {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+#new:hover {
+	cursor: pointer;
+	color: red;
+}
+
+.col-md-3 {
+	margin-top: 15px;
+}
+
+#hot:hover {
+	cursor: pointer;
+	color: red;
+}
+#videoclass li:hover{
+color:blue;
+	cursor: pointer;
+
+}
+	#videoclass li{
+     height:35px;
+		width:70px;
+		display: inline-block;
+	}
+</style>
+<script>
+
+    var singlevideo;
+    var datas  = [];
+
+    var active="";
+    var ss="";
+
+	window.onload = function() {
+
+        var Ofen = document.getElementById('fenye');
+        var Olesson = document.getElementById('lesson');
+        var Oli=Ofen.getElementsByTagName('li');
+        //  var Ocontainer=Oye.getElementsByTagName('div');
+        var Ocontainer=Olesson.getElementsByClassName('container');
+        var Ocontainer=Olesson.getElementsByClassName('container');
+
+		var Olesson = document.getElementById('lesson');
+var session;
+var opersonmessage= document.getElementById('personmessage');
+		var Oh = Olesson.getElementsByTagName('h1');
+
+        $.ajax({
+            url : "User/cookies2.do",
+            type : "post",
+            success : function(data) {
+                session = data;
+                $("#load").html( "欢迎您!"+session);
+
+            },
+            error : function(data) {
+                alert("接收不到");
+            }
+        });
+    $
+    .ajax({
+        url: "User/getheadimg.do",
+        type: 'post',
+        async: false,
+        success: function (data) {
+
+            if(data==null||data==""){
+
+                $("#headimg").attr("src","images/honghu.jpg");
+            }
+            else
+            {
+                $("#headimg").attr("src",data);
+            }
+        },
+
+        error: function (data) {
+            alert("error");
+        }
+    });
+
+    opersonmessage.onclick = function() {
+    if (session == ''||session==null) {
+    alert("你还没登录哦!");
+    location.reload();
+} else {
+    window.location.href = "person.html";
+}
+
+};
+
+        var osearchtext = document.getElementById('searchtext');
+        var osearch=document.getElementById('search');
+
+
+        osearch.onclick = function() {
+
+            var text=osearchtext.value;
+            var target=text;
+             active="find";
+             a(target);
+
+
+        };
+
+
+function  a(e){
+    $
+        .ajax({
+            url : 'User/video.do',
+            type : "post",
+
+            dataType : "json",
+            contentType: "application/json; charset=utf-8",
+            async : false,
+            success : function(data) {
+
+
+
+
+                if(active=="entertain"){
+
+                    $("#lesson").empty();
+                    $("#fenye").empty();
+                    var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+
+                    data = data.filter(function(p){
+                        return p.classify === "娱乐";
+                    });
+                    datas=data;
+
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+
+
+                }
+                if(active=="teg"){
+
+                    $("#lesson").empty();
+                    $("#fenye").empty();
+                    var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+
+                    data = data.filter(function(p){
+                        return p.classify === "科技";
+                    });
+                    datas=data;
+                    console.log(data);
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+
+
+                }
+                if(active=="sport"){
+
+                    $("#lesson").empty();
+                    $("#fenye").empty();
+                    var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+
+                     data = data.filter(function(p){
+                        return p.classify === "运动";
+                    });
+                     datas=data;
+
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+
+
+				}
+                if(active=="video"){
+
+                    $("#lesson").empty();
+                    $("#fenye").empty();
+                    var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+
+                    data = data.filter(function(p){
+                        return p.classify === "影视";
+                    });
+                    datas=data;
+
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+
+
+                }
+                if(active=="hot"){
+                    data=datas;
+                    console.log(data);
+
+         $("#lesson").empty();
+				$("#fenye").empty();
+				var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+
+                    function sortId(a,b){
+                        return b.playback-a.playback
+                    }
+                    datas.sort(sortId);
+
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+				}
+              if(active=="new"){
+
+                  data=datas;
+
+
+
+                  function sortId(a,b){
+                        return Date.parse(b.time) - Date.parse(a.time);
+                    }
+
+                    datas.sort(sortId);
+
+                    $("#lesson").empty();
+                    $("#fenye").empty();
+                    var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+
+
+				}
+				if(active=="all"|| e=="all"){
+                  datas=data;
+                    $("#lesson").empty();
+                    $("#fenye").empty();
+                    var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+
+				}
+
+
+                if(active=="find") {
+                   var text=e;
+                   var datad=[];
+
+
+
+                        var len = data.length;
+                        var arr = [];
+
+                        for(var i=0;i<len;i++){
+                            //如果字符串中不包含目标字符会返回-1
+                            if(data[i]['text'].indexOf(e)>=0){
+                                arr.push(data[i]);
+                            }
+                        }
+                    data=arr;
+					if(data.length==0){
+					    alert("找不到呀！");
+                        window.location.href = "lesson.html";
+					}
+                   datas=arr;
+
+                    $("#lesson").empty();
+                    $("#fenye").empty();
+                    var getli= "<li ><a href='#'>&laquo;</a></li><li id='fenyenumber'><a href='#'>&raquo;</a></li>";
+
+
+                    $("#fenye").append(getli);
+                    var str1= "<div  style='height: 500px;'  class='container'></div>";
+                    var length = data.length;
+                    var time = length / 8;
+                    var b = 0;
+                    try{
+                        //判断是否能整除排满页面
+                        if(length-(time*8)!=0){
+                            for(var i=0;i<time+1;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a>"+(i+1)+"</a></li>");
+                            }
+                        }
+                        else{
+                            for(var i=0;i<time;i++){
+                                $("#lesson").append(str1);
+                                $("#fenyenumber").before("<li><a >"+(i+1)+"</a></li>");
+                            }
+                        }
+
+//先添加一个页面8个 ，判断是否多出，放在最后
+                        for (var j = 0; j < time; j++) {
+                            for (var i = b; i < b + 8; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" +data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[j]).append(str);
+                            }
+                            b = b + 8;
+                        }
+                        if (length - (time * 8) != 0) {
+                            for (var i = (time * 8); i<  data.length; i++) {
+
+                                str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+                                    + "'" + "alt='" + data[i]['vurl'] + "'" +">"
+                                    + "<div  class='pull-right'>&nbsp;"
+                                    + data[i]['vtime']
+                                    + "&nbsp;</div>"
+                                    + "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+                                    + data[i]['text']
+                                    + "</h1>"
+                                    + "<span class='glyphicon glyphicon-play-circle'>"
+                                    + data[i]['playback']
+                                    + "</span>"
+                                    + "<span  class='glyphicon glyphicon-time pull-right'>"
+                                    + data[i]['time'] + "</span></div>";
+                                $(Ocontainer[Ocontainer.length]).append(str);
+                            }
+                        }
+                    }catch (err){
+                        console.log("I don  konw!");
+                    }
+
+
+
+                }
+                //自制分页
+                //根据视频个数创造分页
+            }
+
+        });
+
+    for(var j=0;j<Ocontainer.length;j++){
+        Ocontainer[j].index=j;
+        Ocontainer[j].style.display='none';
+    }
+    Ocontainer[0].style.display='block';
+    for(var i=0;i<Oli.length;i++){
+        Oli[i].index = i;
+
+        Oli[i].onclick=function(){
+            var b = this.index;
+            if(b==0){
+                for(var j=0;j<Ocontainer.length;j++){
+
+                    Ocontainer[j].style.display='none';
+                }
+
+                Ocontainer[0].style.display='block';
+            }
+            if(b==Oli.length-1){
+                for(var j=0;j<Ocontainer.length;j++){
+
+                    Ocontainer[j].style.display='none';
+                }
+
+                Ocontainer[Ocontainer.length-1].style.display='block';
+
+            }
+            else if(b!=0 && b!=Oli.length+1){
+
+
+
+                for(var j=0;j<Ocontainer.length;j++){
+
+                    Ocontainer[j].style.display='none';
+                }
+                Ocontainer[b-1].style.display='block';
+            }
+        }
+    }
+    $.ajax({
+        url:"User/messagesremind.do",
+        type:"post",
+        data:{
+            "username":$("#load").html()
+        },
+        async:true,
+        success : function(data) {
+            if(data=="0"){
+                $("#total").text("");
+            }
+            else{
+                $("#total").text(data);
+                console.log(data);
+            }
+        }
+    });
+    var Odiv = Olesson.getElementsByClassName('col-md-3');
+
+    for (var i = 0; i < Odiv.length; i++) {
+        Odiv[i].index = i;
+        Odiv[i].onclick = function() {
+            var c = this.index;
+
+            var text = $(Odiv[c]).find("h1").html();
+
+
+            $
+                .ajax({
+                    url : 'User/playback.do',
+                    type : "post",
+					aynac:false,
+                    data : {
+                        "text" : text
+                    },
+
+                    async : false,
+                    success : function(data) {
+
+
+                     url = "http://localhost:8080/xuenian/video1.html?id="+data;
+
+                        window.open(url);
+
+                    },
+                    error : function(data) {
+
+
+                    }
+                });
+        };
+    }
+
+}
+
+
+
+
+
+var s="all"
+
+
+        a(s);
+
+
+
+$("#hot").click(function () {
+    $("#hot").css("color","red");
+    $("#new").css("color","white");
+    active="hot";
+    a(active);
+
+});
+
+        $("#exit").click(function () {
+            $
+                .ajax({
+                    url : "User/clearsession.do",
+                    type : 'post',
+                    async : false,
+                    success : function(data) {
+                        $("#load").html("欢迎您!");
+                        session="";
+                        $("#headimg").attr("src","images/honghu.jpg");
+
+                        alert("退出账号！");
+                    }
+                });
+
+        });
+
+
+
+        $("#new").click(function () {
+            $("#new").css("color","red");
+            $("#hot").css("color","white");
+            active="new";
+            a(active);
+
+        });
+        $("#all").click(function () {
+            $("#all").css("color","blue");
+            $("#video").css("color","black");
+            $("#sport").css("color","black");
+            $("#teg").css("color","black");
+            $("#entermain").css("color","black");
+
+            active="all";
+            a(active);
+
+
+        });
+        if( localStorage["name1"]=="search"){
+           var search=  localStorage["search"]
+
+			var target=search;
+            active="find";
+            a(target);
+
+        }
+
+       if( localStorage["name"]==1){
+
+           $("#sport").css("color","blue");
+           active="sport";
+           a(active);
+
+	   }
+
+        if( localStorage["name"]==2){
+            $("#entertain").css("color","blue");
+            active="entertain";
+            a(active);
+        }
+
+        if( localStorage["name"]==2){
+            $("#entertain").css("color","blue");
+            active="entertain";
+            a(active);
+        }
+        if( localStorage["name"]==3){
+            $("#teg").css("color","blue");
+            active="teg";
+            a(active);
+        }
+        if( localStorage["name"]==4){
+            $("#video").css("color","blue");
+            active="video";
+            a(active);
+        }
+
+
+        $("#sport").click(function () {
+
+            $("#all").css("color","black");
+            $("#video").css("color","black");
+            $("#sport").css("color","blue");
+            $("#teg").css("color","black");
+            $("#entertain").css("color","black");
+
+           active="sport";
+            a(active);
+        });
+        $("#video").click(function () {
+            $("#all").css("color","black");
+            $("#video").css("color","blue");
+            $("#sport").css("color","black");
+            $("#teg").css("color","black");
+            $("#entertain").css("color","black");
+
+            active="video";
+            a(active);
+        });
+        $("#teg").click(function () {
+            $("#all").css("color","black");
+            $("#video").css("color","black");
+            $("#sport").css("color","black");
+            $("#teg").css("color","blue");
+            $("#entertain").css("color","black");
+
+            active="teg";
+            a(active);
+        });
+        $("#entertain").click(function () {
+            $("#all").css("color","black");
+            $("#video").css("color","black");
+            $("#sport").css("color","black");
+            $("#teg").css("color","black");
+            $("#entertain").css("color","blue");
+            active="entertain";
+            a(active);
+        });
+	};
+
+	function jumphome() {
+
+		window.location.href = "home1.html";
+
+	}
+
+	$("#jumplesson").click(function() {
+		window.location.href = "lesson.html";
+
+	});
+
+</script>
+</head>
+
+<body>
+
+
+
+	<div style="width:100%;" class=" container">
+		<nav style="" class="navbar navbar-default ">
+			<div style="" class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div style="" class=" navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a id="load" class=" navbar-brand" href="#"></a>
+				</div>
+
+
+				<div style="" class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li id="jumphome"><a onclick="jumphome()">首页 <span
+								class="sr-only">(current)</span></a></li>
+						<li id="jumplesson" class="active"><a>课程</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">帮助 <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+
+
+
+								<li><a href="#">技术协助</a></li>
+							</ul></li>
+					</ul>
+					<ul style="margin-right: 40px" class=" nav navbar-nav navbar-right">
+
+
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"> <img
+								id="headimg" style="width: 40px; height: 40px; margin-top: -10px;"
+								class=" img-circle pull-right" src="images/alien.jpg"> </span></a>
+							<ul class="dropdown-menu">
+
+								<li id="personmessage"><a href="#">个人信息</a></li>
+								<li role="separator" class="divider"></li>
+								<li id="exit"><a href="#">退出登入</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">技术协助</a></li>
+							</ul></li>
+
+
+					</ul>
+					<ul style="margin-right: 40px" class=" nav navbar-nav navbar-right">
+
+						<li><a href="#">消息&nbsp;&nbsp;&nbsp;</a><p id="total"></p>  </li>
+
+						</li>
+					</ul>
+
+					<div class=" navbar-form navbar-right ">
+						<div class="form-group">
+							<input id="searchtext" type="text" class="form-control" placeholder="Search">
+						</div>
+						<button id="search" class="btn btn-default">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</div>
+
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	</div>
+	<br>
+
+	<div class="container">
+		<ul id="videoclass" class="list-group">
+			<p style="color: white;font-size: 25px;">类型</p>
+			<li id="all" class="list-group-item">全部</li>
+			<li id="sport" class="list-group-item">运动</li>
+			<li id="video" class="list-group-item">影视</li>
+			<li id="teg" class="list-group-item">科技</li>
+			<li id="entertain" class="list-group-item">娱乐</li>
+
+		</ul>
+
+		<a id="new"  style="color: red;" class="col-md-1">最新</a>
+		<a id="hot" class=" col-md-1">最热</a>
+
+	</div>
+
+	<div id="ye" class="container" style="border: 2px solid white;">
+		<div id="lesson" class="row">
+
+		</div>
+	</div>
+	<nav style="text-align: center">
+	<ul id="fenye"  class="pagination ">
+		<li ><a href="#">&laquo;</a></li>
+
+
+
+		<li id="fenyenumber"><a href="#">&raquo;</a></li>
+	</ul>
+	</nav>
+
+	<div  class="footer text-center ">
+		<p style="color: black;">&copy; 2018 Access Video Website. All
+			rights reserved | Design by HWJ</p>
+	</div>
+
+</body>
+</html>

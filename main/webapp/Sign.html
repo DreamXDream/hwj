@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap Flat Registration Form Template</title>
+
+<link rel="stylesheet" href="resource/Sign/bootstrap.min.css">
+<link rel="stylesheet" href="resource/Sign/font-awesome.min.css">
+<link rel="stylesheet" href="resource/Sign/form-elements.css">
+<link rel="stylesheet" href="resource/Sign/style.css">
+<script src="resource/jquery-1.9.1.js"></script>
+</head>
+
+<body>
+
+	<!-- Top menu -->
+	<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+
+				<a class="navbar-brand" href="index.html">Bootstrap Flat
+					Registration Form Template</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+		</div>
+	</nav>
+
+	<!-- Top content -->
+	<div class="top-content">
+
+		<div class="inner-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 text">
+
+						<div class="description">
+							<p style="font-size: 45px;">Sign Your Account.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 book">
+						<img src="resource/Sign/ebook.png" alt="">
+					</div>
+					<div class="col-sm-5 form-box">
+						<div class="form-top">
+							<div class="form-top-left">
+								<h3>注册账户,已注册前往<p style="display: inline-block;" id="gologin">登入</p></h3>
+								<p>账户信息请保存好！</p>
+							</div>
+							<div class="form-top-right">
+								<i class="fa fa-pencil"></i>
+							</div>
+						</div>
+						<div class="form-bottom">
+							<div role="form" action="" method="post"
+								class="registration-form">
+								<div class="form-group">
+									<label class="sr-only" for="form-first-name"></label> <input
+										id="username" type="text" name="form-first-name"
+										placeholder="First Account..."
+										class="form-first-name form-control" id="form-first-name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-last-name">Password</label> <input
+										id="password" type="text" name="form-last-name"
+										placeholder="First Password..."
+										class="form-last-name form-control" id="form-last-name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-email">Password</label> <input
+										id="password1" type="text" name="form-email"
+										placeholder="Check Password..."
+										class="form-email form-control" id="form-email">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="form-emails">Password</label> <input
+										id="email" type="text" name="form-email"
+										placeholder="email..."
+										class="form-email form-control" id="form-emails">
+								</div>
+								<button id="up" type="submit" class="btn">Sign it!</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+</body>
+
+</html>
+<script>
+
+	    window.onload = function() {
+	
+       
+		var oup=document.getElementById('up');
+            $("#gologin").click(function(){
+                window.location.href="login(1).html";
+            });
+
+		oup.onclick=function(){
+			var username=document.getElementById('username').value;
+			var password=document.getElementById('password').value;
+			var password1=document.getElementById('password1').value;
+		    var email=document.getElementById('email').value;
+
+            if(email == ''){
+                alert("请输入您的邮箱");
+                return;
+            }else if(email != "") {
+                var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+                isok= reg.test(email );
+                if (!isok) {
+                    alert("邮箱格式不正确，请重新输入！");
+                    return false;
+                }
+            };
+			$.ajax({
+				url : "User/user.do",
+				type : "post",
+				data : {
+					"username":username,
+					"password":password,
+					"password1":password1,
+					"email":email
+				},
+				async : false,
+				success : function(data) {
+					if(data=='No'){
+						alert("注册失败");
+					}
+					else {
+						alert("注册成功");
+						window.location.href="login(1).html";
+					}
+				}
+			});
+
+		};
+	};
+	
+
+</script>

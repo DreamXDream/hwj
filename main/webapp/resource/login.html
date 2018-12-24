@@ -1,0 +1,207 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="bootstrap.css" />
+<script src="jquery-1.9.1.js"></script>
+<script src="bootstrap.js" /></script>
+
+<title>22</title>
+<style>
+html, body {
+	font-style: oblique;
+	font-family: 微软雅黑;
+	height: 100%;
+}
+
+body {
+	overflow: hidden;
+	background-attachment: fixed;
+	background-image: url(images/62896486ee65bef0346c7d31f17cafed.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+}
+
+.container {
+	height: 300px;
+}
+
+.row {
+	margin-bottom: 15px;
+}
+</style>
+</head>
+<body>
+
+	<h1 style="color: white" class="page-header text-center">Login Up</h1>
+	<div
+		style="background-color: grey; background-color: rgba(216, 216, 216, 0.3);"
+		class="col-md-6 col-md-offset-3">
+
+
+		<div class="form-horizontal">
+			<!--
+水平排列
+-->
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">用户名:</lable>
+				<div class="col-sm-10 has-success has-feedback">
+
+					<input type="text" id="username" name="username"
+						placeholder="Input your account" class="form-control"> <span
+						class="glyphicon glyphicon-user form-control-feedback"></span>
+
+				</div>
+			</div>
+
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+				<div class="col-sm-10 has-warning has-feedback">
+
+					<input name="password" id="password" type="text"
+						placeholder="Input your password" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+
+				</div>
+			</div>
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+				<div class="col-sm-10 has-error has-feedback">
+
+
+					<input id="password1" name="password1" type="text"
+						placeholder="Input your password" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+
+				</div>
+			</div>
+
+
+			<div style="margin-top: 40px;" class="form-group">
+				<lable id="checknumber" id="checknumber"
+					class="col-sm-2 control-label">验证码</lable>
+				<div class="col-sm-10 has-error has-feedback">
+
+					<input name="number" type="hidden" id="checknum" value="">
+
+
+
+
+					<input name="number1" id="number1" type="text"
+						placeholder="Input your Code" class="form-control"> <span
+						class="glyphicon glyphicon-star form-control-feedback"></span>
+				</div>
+			</div>
+
+			<div class="checkbox pull-right">
+				<label id="checkbox1" style="color: black;"> <input
+					id="checkbox" type="checkbox">记住账号
+				</label>
+			</div>
+
+
+
+			<div style="margin-top: 40px;" class="form-group  text-center">
+				<input id="up" type="submit" name="sub" style="width: 120px"
+					value="OK" class="btn btn-primary"> <input type="button"
+					style="margin-left: 30px; width: 120px" value="Cancel"
+					class="btn btn-primary">
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>
+<script>
+	window.onload = function() {
+
+		var checkbox;
+
+		$("#checkbox1").click(function() {
+			if ($("#checkbox").get(0).checked) {
+				checkbox = "checkon";
+
+			}
+
+		});
+
+		var oCheckNumber = document.getElementById('checknumber');
+
+		var a = parseInt(10 * Math.random());
+
+		var b = parseInt(10 * Math.random());
+		var c = parseInt(10 * Math.random());
+		var d = parseInt(10 * Math.random());
+		var e = a + '' + b + '' + c + '' + d;
+		oCheckNumber.innerText = e;
+		oCheckNumber.style.color = 'red';
+
+		var oup = document.getElementById('up');
+		oup.onclick = function() {
+			var oCheckNum = document.getElementById('checknum');
+			var username = document.getElementById('username').value;
+			var password = document.getElementById('password').value;
+			var password1 = document.getElementById('password1').value;
+			var checknumber = document.getElementById('checknumber').value;
+			var number1 = document.getElementById('number1').value;
+
+			oCheckNum.value = e;
+			var number = oCheckNum.value;
+
+			$
+					.ajax({
+						url : "User/login.do",
+						type : "post",
+						data : {
+							"username" : username,
+							"password" : password,
+							"password1" : password1,
+							"number" : number,
+							"number1" : number1,
+							"checkbox" : checkbox
+
+						},
+						async : false,
+						success : function(data) {
+							console.log(data);
+							if (data == 'No') {
+								alert("登入失败");
+							} else if (data == 'Yes') {
+								alert("登入成功");
+								window.location.href = "home.html";
+							}
+						}
+					});
+
+		};
+
+		//登入cookie
+		$.ajax({
+			url : "User/cookies.do",
+			type : "post",
+			success : function(data) {
+				if (data == "No") {
+
+				} else {
+					var s = data;
+					var arr = new Array();
+					arr = s.split('+');
+					for (var i = 0; i < arr.length; i++) {
+
+						$("#username").val(arr[0]);
+						$("#password").val(arr[1]);
+						$("#password1").val(arr[1]);
+					}
+				}
+			}
+
+		});
+
+	};
+</script>

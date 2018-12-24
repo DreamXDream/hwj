@@ -1,0 +1,162 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Access Subscribe Form Flat Responsive Widget Template :: w3layouts</title>
+<!-- Meta tag Keywords -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+
+<!-- Meta tag Keywords -->
+
+<!-- css files -->
+<link rel="stylesheet" href="resource/login/css/style.css" type="text/css" media="all" /> <!-- Style-CSS --> 
+<link rel="stylesheet" href="resource/login/css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
+<!-- //css files -->
+	<script src="resource/jquery-1.9.1.js"></script>
+	<script src="resource/bootstrap.js" ></script>
+
+
+</head>
+
+<body>
+
+<div class="center-container">
+
+	<!--header-->
+	<div class="header-w3l">
+		<h1>Access Video Home</h1>
+	</div>
+	<!--//header-->
+	
+	<!--main-->
+	<div class="main-content-agile ">
+			<h2>输入用户信息!<i class="fa mail fa-envelope"></i></h2>
+			<h3>没有账户先前往<p style="display: inline-block;cursor:pointer; " id="goSign">注册</p></h3>
+		<div class="sub-main-w3">	
+			<div action="#" method="post">
+				<div class="field">
+					<i class="fa fa-user"></i>
+					<input  id="username" placeholder="Full Account" name="Account" type="text" >
+				</div>
+				<div class="field">
+					<i class="fa fa-star"></i>
+					<input id="password" placeholder="password" name="password" type="text" >
+				</div>
+				<div class="field">
+					<i class="fa fa-retweet"></i>
+					<input   id="password1" placeholder="check password" name="check password" type="text" >
+				</div>
+                
+                <div class="pull-right">
+				<label id="checkbox1" style="color: white;"> <input
+					id="checkbox" type="checkbox">记住账号
+				</label>
+			    </div>
+				<p id="forget" style="cursor: pointer;"><i class="fa fa-lock"></i> 忘记密码</p>
+				<input type="button" id="up" value="Login">
+			</div>
+		</div>
+		
+		
+	</div>
+	
+	<!--//main-->
+	
+	<!--footer-->
+	<div class="footer">
+		<p style="color:black;">&copy; 2018 Access Video Website. All rights reserved | Design by HWJ</p>
+	</div>
+	<!--//footer-->
+	
+</div>
+
+</body>
+</html>
+<script>
+	window.onload = function() {
+
+		var checkbox;
+        $("#goSign").click(function(){
+
+            window.location.href="Sign.html";
+        });
+        $("#forget").click(function(){
+
+            window.location.href="password.html";
+
+        });
+		$("#checkbox1").click(function() {
+			if ($("#checkbox").get(0).checked) {
+				checkbox = "checkon";
+
+			}
+
+		});
+
+
+		var oup = document.getElementById('up');
+		oup.onclick = function() {
+			
+			var username = document.getElementById('username').value;
+			var password = document.getElementById('password').value;
+			var password1 = document.getElementById('password1').value;
+
+			$
+					.ajax({
+						url : "User/login.do",
+						type : "post",
+						data : {
+							"username" : username,
+							"password" : password,
+							"password1" : password1,
+							"checkbox" : checkbox
+
+						},
+						async : false,
+						success : function(data) {
+							console.log(data);
+							if (data == 'No') {
+								alert("登入失败");
+							} else if (data == 'Yes') {
+								alert("登入成功");
+								window.location.href = "home1.html";
+							}
+							else if(data=='admin'){
+                                alert("管理员登入！");
+                                window.location.href = "backstages.html";
+							}
+						}
+					});
+
+		};
+
+		//登入cookie
+		$.ajax({
+			url : "User/cookies.do",
+			type : "post",
+			success : function(data) {
+				if (data == "No") {
+
+				} else {
+					var s = data;
+					var arr = new Array();
+					arr = s.split('+');
+					for (var i = 0; i < arr.length; i++) {
+
+						$("#username").val(arr[0]);
+						$("#password").val(arr[1]);
+						$("#password1").val(arr[1]);
+					}
+				}
+			}
+
+		});
+
+	};
+</script>

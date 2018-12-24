@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<!-- Meta-tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link href="resource/bootstrap.css" rel="stylesheet" />
+
+<link href="resource/font-awesome.css" rel="stylesheet" />
+
+<link href="resource/assets/css/custom-styles.css" rel="stylesheet" />
+<link href="resource/jquery.page.css" rel="stylesheet"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="resource/jquery-ui.css">
+<script src="resource/jquery-1.10.2.js"></script>
+	<script src="resource/jquery.page.js"></script>
+<script src="resource/jquery-ui.js"></script>
+<script src="resource/bootstrap.min.js"></script>
+<script src="resource/jquery.metisMenu.js"></script>
+
+
+<style>
+boay, html {
+	padding: 0;
+	margin: auto;
+}
+
+body {
+	margin: 0;
+	background-color: white;
+}
+
+.container {
+
+}
+
+#lesson .col-md-3:hover {
+	cursor: pointer;
+	color: blue;
+}
+
+#video-up .col-md-3:hover {
+	cursor: pointer;
+}
+
+#video-up .col-md-3 img {
+	width: 100%;
+	height: 140px;
+	position: relative;
+}
+
+#video-up .col-md-3 div {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.4);
+	top: 120px;
+	right: 15px;
+	color: white;
+}
+
+#video-up .col-md-3 h1 {
+	overflow: hidden;
+	font-size: 20px;
+	line-height: 25px;
+	display:inline-block;
+	width:100%;
+	height:25px;
+	color:white;
+}
+
+#video-up .col-md-3 h1:hover {
+	color: blue;
+	cursor: pointer
+}
+
+#Operson .col-md-3 {
+	border: 1px solid transparent;
+	margin-left: 15px;
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+#message {
+	margin-top: 80px;
+}
+
+#m {
+	margin-top: 70px;
+}
+
+#message .col-md-2 {
+	margin-top: 35px;
+	margin-bottom: 15px;
+}
+
+#message .col-md-9 {
+	margin-top: 35px;
+	margin-bottom: 15px;
+}
+
+#page-wrapper {
+	overflow: hidden;
+	background-attachment: fixed;
+	background-image: url(images/bilibili.jpg);
+	background-size:100% 140%;
+	background-repeat: no-repeat;
+}
+
+#video-up {
+	display: none;
+}
+
+#headimg:hover {
+	cursor: pointer;
+}
+
+.col-md-3 span:nth-child(3) {
+	opacity: 0.1;
+	right: 15px;
+	position: absolute;
+	font-size: 25px;
+}
+
+.col-md-3 span:nth-child(3):hover {
+	cursor: pointer;
+	opacity: 1;
+}
+	.rows{
+		border-style: solid;
+		border-color: rgba(250,255,255,0.1);
+		font-size:20px;
+		border-radius:10px;
+		height:120px;
+		margin-top: 15px;
+		background-color: white;
+	}
+	.rows:hover{
+		cursor: pointer;
+		border-color: rgba(0,245,255,0.9);
+	}
+
+	.headimg{
+		margin-top:20px ;
+		border-radius:50%;
+		width: 50px;
+		height: 50px;
+	}
+	.headimg:hover{
+		cursor: pointer;
+	}
+	.time{
+		position: relative;
+		display:inline-block;
+		font-size: 12px;
+	}
+	.content{
+		position:absolute;
+		top:32px;
+		left:15px;
+		color:blue;
+		line-height: 12px;
+		display:inline-block;
+		font-size: 13px;
+	}
+	.content:hover{
+		opacity: 0.8;
+		cursor: pointer;
+	}
+	.videotext{
+		line-height: 12px; margin-top:-15px;color:blue;display:inline-block;font-size: 12px;
+	}
+.videotext:hover{
+	cursor: pointer;
+	opacity: 0.7;
+
+}
+	#liuyan span:hover{
+		color: blue;
+		cursor: pointer;
+	}
+	.username{
+
+		display:inline-block;
+		font-size: 20px;
+
+
+	}
+  .username:hover{
+	  color: blue;
+	  cursor: pointer;
+  }
+	.circ{
+		color:white;
+		margin-top:5px;
+		font-size:20px;
+	}
+.circs{
+	color:red;
+	margin-top:5px;
+	font-size:20px;
+}
+</style>
+</head>
+<body>
+
+	<div id="wrapper">
+
+		<nav style="background-color: black;"
+			class="navbar navbar-default top-navbar"
+			style="background-color: grey;" role="navigation">
+			<div class="navbar-header">
+
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+
+				<a style="background-color: black;" class="navbar-brand" href="#"><i
+					class="fa fa-comments"></i> <strong id="load"> </strong> </a>
+			</div>
+			<input id="session" type="hidden" value="">
+			<ul style="background-color: black;"
+				class="nav navbar-top-links navbar-right">
+
+
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> 课程
+
+								</div>
+						</a></li>
+
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> 视频
+
+								</div>
+						</a></li>
+
+
+
+
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="fa fa-sign-out fa-fw"></i>
+								Logout</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+		</nav>
+		<!--/. NAV TOP  -->
+		<nav style="background-color: white;"
+			class="col-md-3 pull-right navbar-default navbar-side"
+			role="navigation">
+			<div style="background-color: white;" style="text-align:center;"
+				class="sidebar-collapse">
+				<ul id="list" style="text-align: center;" class="nav" id="main-menu">
+					<div style="position: relative" id="headimg"
+						class="row center-block">
+
+						<img id="personimg"
+							style="width: 120px; height: 120px; margin-top: 40px;"
+							class=" img-circle img-responsive center-block"
+							src="images/personal.jpg">
+
+						<h1 id="genhuan"
+							style="bottom: 10px; margin-left: 82px; position: absolute; display: none; font-size: 15px;"
+							class="row center-block">更换头像</h1>
+					</div>
+
+					<li style="margin-top: 20px;"><a href="#"><i
+							class="fa fa-qrcode"></i> 个人中心 </a></li>
+
+					<li><a href="#"><i class="fa fa-bar-chart-o"></i>我的收藏</a></li>
+
+					<li id="chat"><a href="#"><i class="fa fa-qrcode"></i> 好友列表 </a></li>
+					<li><a style="display: inline-block;" href="#"><i class="fa fa-bar-chart-o"></i>消息回复</a><p id="total"  style="margin-top: -15px; color: red; display: inline-block;">3</p></li>
+
+					<li id="ebackstage"><a href="#"><i
+							class="fa fa-fw fa-file"></i>退出中心</a></li>
+				</ul>
+
+			</div>
+
+		</nav>
+	</div>
+	<!-- /. NAV SIDE  -->
+	<div id="page-wrapper" class="container col-md-9 " style="width: 83%;">
+		<div id="video-up" style="margin-top: 50px;" class="container">
+
+
+		</div>
+
+
+		<div id="lesson" style="display: none;" class="container"></div>
+
+		<div id="person" style="display: none;" class="container">
+			<div   style="margin-left:10%;width:78%;font-size:20px; border-radius:10px;height:50px;background-color: white;" class="row"><p style="margin-top: -10px;margin-left: 20px;">我的评论</p></div>
+
+			<div style="width: 80%; height: 550px; " id="liuyan" class="container">
+
+
+
+
+
+
+
+			</div>
+
+			<div style="margin-top: -110px;" id="page"></div>
+
+		</div>
+
+		<div id="check" style="display: none; margin-top: 100px;"
+			class="container">
+
+
+
+		</div>
+
+
+		<div id="updata" class="container" style="display: none;">
+
+			<div class="form-horizontal">
+
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">ID:</lable>
+					<div class="col-sm-8 has-warning has-feedback">
+
+						<input readonly="readonly" value="" name="id" id="id" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+
+
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">用户名:</lable>
+					<div class="col-sm-8 has-warning has-feedback">
+
+						<input value="" name="username" id="dusername" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+					<div class="col-sm-8 has-error has-feedback">
+
+
+						<input value="" id="dpassword" name="password" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+				<div style="margin-top: 40px; margin-left: -60px;"
+					class="form-group  text-center">
+					<input id="sub" type="submit" name="sub" style="width: 120px"
+						value="确定" class="btn btn-primary"> <input type="button"
+						style="margin-left: 30px; width: 120px" value="取消"
+						class="btn btn-primary">
+				</div>
+			</div>
+		</div>
+
+		<div id="message" style="width: 100%;" class="container">
+			<div class="page-header">
+				<h1 style="color: white;" class=" pull-left ">个人中心</h1>
+				<input type="button" id="edit"
+					class=" page-header btn btn-danger pull-right"
+					style="margin-right: 40px;" value="编辑">
+			</div>
+
+			<div style="" id="m" class="col-md-8 col-md-offset-2">
+
+				<div
+					style="background-color:#00BFFF; color:white; text-align: center; line-height: 60px; font-size: 18px;"
+					class="col-md-2 ">昵称</div>
+				<div id="nickname1"
+					style="background-color: white; line-height: 60px; font-size: 25px; border-bottom: 1px solid grey; margin-left: 10px;"
+					class="col-md-9 ">未设置呢称</div>
+
+				<div
+					style="background-color: #00BFFF; color:white;text-align: center; line-height: 60px; font-size: 18px;"
+					class="col-md-2 ">职位</div>
+				<div id="job1"
+					style="background-color: white; line-height: 60px; font-size: 25px; border-bottom: 1px solid grey; margin-left: 10px;"
+					class="col-md-9 ">未设置职位</div>
+
+				<div
+					style="background-color: #00BFFF; color:white; text-align: center; line-height: 60px; font-size: 18px;"
+					class="col-md-2 ">性别</div>
+				<div id="sex1"
+					style="background-color: white; line-height: 60px; font-size: 25px; border-bottom: 1px solid grey; margin-left: 10px;"
+					class="col-md-9 ">未设置性别</div>
+
+				<div
+					style="background-color:#00BFFF; color:white; text-align: center; line-height: 60px; font-size: 18px;"
+					class="col-md-2 ">个性签名</div>
+				<div id="sign1"
+					style="background-color: white; line-height: 60px; font-size: 25px; border-bottom: 1px solid grey; margin-left: 10px;"
+					class="col-md-9 ">未设置签名</div>
+
+			</div>
+
+
+
+			<div class="container" id="checkandPass" title="审核意见"
+				style="display: none;">
+
+				<h1 style="color: black;" class=" text-center ">个人信息</h1>
+				<div style="background-color: white;" class="">
+					<div class="form-horizontal">
+
+						<div style="margin-top: 40px;" class="form-group">
+							<lable for="" style="color:black" class="col-sm-3 control-label">
+							昵称:</lable>
+							<div class="col-sm-8 has-success has-feedback">
+								<input type="text" id="nickname" name="nickname"
+									placeholder="Input your account" class="form-control">
+							</div>
+						</div>
+						<div style="margin-top: 40px;" class="form-group">
+							<lable for="" style="color:black" class="col-sm-3 control-label">职位:</lable>
+							<div class="col-sm-8 has-warning has-feedback">
+								<select id="job" class="form-control">
+									<option>学生</option>
+									<option>教师</option>
+								</select>
+							</div>
+						</div>
+						<div style="margin-top: 40px;" class="form-group">
+							<lable for="" style="color:black" class="col-sm-3 control-label">性别:</lable>
+							<div class="col-sm-8 has-error has-feedback">
+								<select id="sex" class="form-control">
+									<option>男</option>
+									<option>女</option>
+								</select>
+							</div>
+						</div>
+						<div style="margin-top: 40px;" class="form-group">
+							<lable id="checknumber" for="" class="col-sm-3 control-label">个性签名:</lable>
+							<div class="col-sm-8 has-error has-feedback">
+								<textarea id="sign" class="form-control" rows="3"></textarea>
+							</div>
+						</div>
+
+						<div style="margin-top: 40px;" class="form-group  text-center">
+							<input type="submit" id="submitmessage" style="width: 120px"
+								value="OK" class="btn btn-primary"> <input type="button"
+								style="margin-left: 30px; width: 120px" value="Cancel"
+								class="btn btn-primary">
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<form id="formsub" method="post" class="container"
+				style="display: none;" enctype="multipart/form-data">
+
+				<h1 style="color: black;" class=" text-center ">图片更改</h1>
+				<br>
+				<div style="background-color: white;"
+					class="col-md-8 col-md-offset-2">
+					<div class="form-horizontal center-block">
+
+						<label for="inputfile1">图片路径</label> <input type="file"
+							name="imgfile" id="inputfile1">
+						<p class="help-block">请确认上传的格式正确。</p>
+
+						<input id="sessions" name="imgsetname" type="hidden" value="">
+
+					</div>
+				</div>
+				<div style="margin-top: 40px;" class="form-group  text-center">
+					<input type="button" id="submitimg" style="width: 120px" value="OK"
+						class="btn btn-primary"> <input type="button"
+						style="margin-left: 30px; width: 120px" value="Cancel"
+						class="btn btn-primary">
+				</div>
+			</form>
+
+
+
+
+			<!-- /. WRAPPER  -->
+</body>
+</html>
+<script>
+	window.onload = function() {
+
+		$("#headimg").mouseover(function() {
+			$("#genhuan").css("display", "block");
+		});
+		$("#headimg").mouseout(function() {
+			$("#genhuan").css("display", "none");
+		});
+
+		var operson = document.getElementById('person');
+		var Olist = document.getElementById('list');
+		var Oli = Olist.getElementsByTagName('li');
+		var Ovideo = document.getElementById('video-up');
+
+		var olesson = document.getElementById('lesson');
+		var ocheck = document.getElementById('check');
+		var oupdata = document.getElementById('updata');
+		var omessage = document.getElementById('message');
+		var oebackstage = document.getElementById('ebackstage');
+
+
+
+
+        $('#inputfile1').on('change', function(e){
+            imgFile=this.files[0];
+
+            var string=$("#inputfile1")[0].value;
+            //对路径字符串进行剪切截取
+            console.log(string);
+            var arrays=string.split("\\");
+            //获取文件名，包含后缀
+            var name=arrays[arrays.length-1];
+
+            //为了辨别格式，统一变小写
+            name=name.toLowerCase();
+
+
+
+            if(!(name.endsWith("png")||name.endsWith("jpg")||name.endsWith("jpeg"))) {
+                alert("请上传jpg、jpeg或png格式的图片！");
+                //清理file里的文件内容
+                $("#inputfile1")[0].value="";
+            }
+
+            var size = $("#inputfile1")[0].files[0].size;
+            if(size>3145728)
+			{
+			     alert("图片过大！请更换小的图片！");
+			}
+
+        });
+
+
+		for (var i = 0; i < Oli.length; i++) {
+			Oli[i].index = i;
+
+			Oli[i].onclick = function() {
+				var b = this.index;
+				Ovideo.style.display = 'none';
+				olesson.style.display = 'none';
+				operson.style.display = 'none';
+				ocheck.style.display = 'none';
+				oupdata.style.display = 'none';
+				omessage.style.display = 'none';
+				if (b == 0) {
+					omessage.style.display = 'block';
+
+				}
+				if (b == 1) {
+					Ovideo.style.display = 'block';
+				}
+				if (b == 2) {
+
+					olesson.style.display = 'block';
+				}
+				if (b == 3) {
+					operson.style.display = 'block';
+
+				}
+				if (b == 4) {
+					ocheck.style.display = 'block';
+
+				}
+
+			};
+
+		}
+
+		//查看视频
+
+		var Olesson = document.getElementById('lesson');
+
+		var Odiv = Olesson.getElementsByTagName('div');
+		var Oh = Olesson.getElementsByTagName('h1');
+
+
+		for (var i = 0; i < Odiv.length; i++) {
+			var b = this.index;
+			Odiv[i].onclick = function() {
+
+				window.location.href = 'resource/video.html';
+			};
+
+		}
+		oebackstage.onclick = function() {
+
+			window.location.href = 'home1.html';
+		};
+
+		//图片上传隐藏
+		$("#genhuan").bind('click', function(event) {
+
+			$("#formsub").dialog({
+				autoOpen : true,
+				width : 500,
+				show : "blind",
+				hide : "explode",
+				modal : true,//设置背景灰的
+			});
+			$("#formsub").dialog("open");
+			return true;
+		});
+
+		//编辑隐藏
+		$("#edit").bind('click', function(event) {
+			$("#checkandPass").dialog({
+				autoOpen : true,
+				width : 765,
+				show : "blind",
+				hide : "explode",
+				modal : true,//设置背景灰的
+			});
+			$("#checkandPass").dialog("open");
+			return true;
+		});
+
+
+		//加载个人信息
+		var opersonimg = document.getElementById("personimg");
+		var sessions = document.getElementById("sessions").value;
+		var session = document.getElementById('session').value;
+		var onickname1 = document.getElementById("nickname1");
+		var ojob1 = document.getElementById("job1");
+		var osex1 = document.getElementById("sex1");
+		var osign1 = document.getElementById("sign1");
+
+		$.ajax({
+			url : "User/cookies1.do",
+			type : "post",
+			async : false,
+			success : function(data) {
+       if(data=="er"){
+           window.location.href="home1.html";
+	   }
+	   else{
+				document.getElementById("session").value = data;
+				document.getElementById("sessions").value = data;
+
+				$("#load").html(
+						document.getElementById("session").value + "的个人中心");
+       }
+
+            },
+			error : function(data) {
+				alert("error");
+			}
+
+		});
+
+
+
+		$.ajax({
+
+			url : 'User/selectmessage.do',
+			type : "post",
+
+			data : {
+				"session" : document.getElementById("session").value
+
+			},
+			async : false,
+			success : function(data) {
+
+				for (var i = 0; i < data.length; i++) {
+
+					onickname1.innerHTML = data[i]['name'];
+					ojob1.innerHTML = data[i]['job'];
+					osex1.innerHTML = data[i]['sex'];
+					osign1.innerHTML = data[i]['sign'];
+					opersonimg.src = data[i]['img'];
+				}
+			}
+		});
+
+		//更新个人信息
+		var osubmitmessage = document.getElementById('submitmessage');
+		osubmitmessage.onclick = function() {
+
+			var onickname = document.getElementById("nickname");
+
+
+			var job = $("#job").val();
+			var sex = $("#sex").val();
+			var sign = $("#sign").val();
+			var nickname = onickname.value;
+
+			$
+					.ajax({
+						url : "User/submitmessage.do",
+						type : "post",
+						data : {
+							"session" : document.getElementById("session").value,
+							"nickname" : nickname,
+							"job" : job,
+							"sex" : sex,
+							"sign" : sign
+
+						},
+						async : false,
+						success : function(data) {
+
+							if (data == 'No') {
+								alert("修改失败");
+							} else if (data == 'Yes') {
+								alert("修改成功");
+								window.location.href = "person.html";
+							}
+						}
+					});
+
+		};
+        $('#chat').click(function() {
+
+            window.location.href = "chat.jsp";
+
+
+        });
+
+		$('#submitimg').click(function() {
+			alert(document.getElementById('sessions').value);
+			var form = new FormData(document.getElementById("formsub"));
+			$.ajax({
+				url : "User/imgchange.do",
+				type : "post",
+				data : form,
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					if (data = 'Yes') {
+						alert("success");
+					}
+				},
+				error : function(e) {
+					alert("错误！！");
+
+				}
+			});
+
+		});
+
+		//document.getElementById("session").value
+		$
+				.ajax({
+					url : 'User/getCollect.do',
+					type : "post",
+					data : {
+						"session" : document.getElementById("sessions").value
+					},
+					dataType : "json",
+					async : false,
+					success : function(data) {
+
+						for (var i = 0; i < data.length; i++) {
+
+							str = "<div class='col-md-3'><img   src='" + data[i]['murl']
+			+ "'" + "alt='" + data[i]['vurl'] + "'" +">"
+									+ "<div  class='pull-right'>&nbsp;"
+									+ data[i]['vtime']
+									+ "&nbsp;</div>"
+									+ "<span  class='glyphicon glyphicon-remove pull-right'></span>"
+									+ "<h1 class='text-justify' title='"+ data[i]['text']+"'"+  ">"
+									+ data[i]['text'] + "</h1>" + "</div>";
+
+							$("#video-up").append(str);
+
+						}
+
+						//window.location.href = "lesson.html";
+					},
+					error : function(data) {
+
+
+					}
+				});
+
+var pagel;
+var total;
+var z;
+
+
+totals();
+
+        $(function(){
+
+           $.ajax({
+           url:"User/findmessagetell.do",
+			   type:"post",
+			   data:{
+               "username": document.getElementById("session").value
+			   },
+               async:false,
+			   success:function (data) {
+
+                     var s="你"
+                   pagel=data.length;
+
+                   if(pagel>=3){
+    for(var i=0;i<3;i++){
+        if(data[i]['active']=="0"){
+            var str="<div onclick='changeactive(this,"+ "\"" + data[i]['top'] + "\""+" )' class= 'rows'>\n" +
+                "<div style='margin-top: -10px;' class='col-md-1'>\n" +
+                "<img  onclick='jumpother(this,"+ "\"" + data[i]['username'] + "\"" +");' class='headimg'  src='"+ data[i]['img']+"'>\n" +
+                "<p class='circs'>●</p>\n" +
+                "</div>\n" +
+                "<div  style='margin-top: -10px;' class='col-md-11'>\n" +
+                "<p  onclick='jumpother(this,"  + "\"" + data[i]['username'] + "\"" +");' class='username'>"+data[i]['username']+ "</p>\n" +
+                "<p class='time'>"+data[i]['time']+"</p>\n" +
+                "<p onclick='jumpmessages(this,"+ "\"" + data[i]['txt'] + "\""+");' class='content' >"+data[i]['content']+"</p>\n" +
+                "<div class='row' style='height:33px;margin-left:2px;border-radius:10px;width:90%;margin-top:25px;background-color: lightgrey;'>\n" +
+                "<p onclick='jumpvideo(this,"+ "\"" + data[i]['txt'] + "\""+");' class='videotext' >"+data[i]['txt']+"</p>\n" +
+                "<p class='videotext' style='color:grey;'>评论中回复了"+s+"</p>\n" +
+                "</div>\n" +
+                "</div>\n" +
+                "</div>";
+            $("#liuyan").append(str);
+        }
+        else if(data[i]['active']=="1"){
+            var str="<div onclick='changeactive(this,"+ "\"" + data[i]['top'] + "\""+")' class= 'rows'>\n" +
+                "<div style='margin-top: -10px;' class='col-md-1'>\n" +
+                "<img  onclick='jumpother(this,"+ "\"" + data[i]['username'] + "\"" +");' class='headimg'  src='"+ data[i]['img']+"'>\n" +
+                "<p class='circ'>●</p>\n" +
+                "</div>\n" +
+                "<div  style='margin-top: -10px;' class='col-md-11'>\n" +
+                "<p  onclick='jumpother(this,"  + "\"" + data[i]['username'] + "\"" +");' class='username'>"+data[i]['username']+ "</p>\n" +
+                "<p class='time'>"+data[i]['time']+"</p>\n" +
+                "<p onclick='jumpmessages(this,"+ "\"" + data[i]['txt'] + "\""+");' class='content' >"+data[i]['content']+"</p>\n" +
+                "<div class='row' style='height:33px;margin-left:2px;border-radius:10px;width:90%;margin-top:25px;background-color: lightgrey;'>\n" +
+                "<p onclick='jumpvideo(this,"+ "\"" + data[i]['txt'] + "\""+");' class='videotext' >"+data[i]['txt']+"</p>\n" +
+                "<p class='videotext' style='color:grey;'>评论中回复了"+s+"</p>\n" +
+                "</div>\n" +
+                "</div>\n" +
+                "</div>";
+            $("#liuyan").append(str);
+
+        }
+	}
+				   }
+
+				   else if(pagel<3){
+                       for(var i=0;i<pagel;i++) {
+                           if (data[i]['active'] == "0") {
+                               var str = "<div onclick='changeactive(this," + "\"" + data[i]['top'] + "\"" + " )' class= 'rows'>\n" +
+                                   "<div style='margin-top: -10px;' class='col-md-1'>\n" +
+                                   "<img  onclick='jumpother(this," + "\"" + data[i]['username'] + "\"" + ");' class='headimg'  src='" + data[i]['img'] + "'>\n" +
+                                   "<p class='circs'>●</p>\n" +
+                                   "</div>\n" +
+                                   "<div  style='margin-top: -10px;' class='col-md-11'>\n" +
+                                   "<p  onclick='jumpother(this," + "\"" + data[i]['username'] + "\"" + ");' class='username'>" + data[i]['username'] + "</p>\n" +
+                                   "<p class='time'>" + data[i]['time'] + "</p>\n" +
+                                   "<p onclick='jumpmessages(this," + "\"" + data[i]['txt'] + "\"" + ");' class='content' >" + data[i]['content'] + "</p>\n" +
+                                   "<div class='row' style='height:33px;margin-left:2px;border-radius:10px;width:90%;margin-top:25px;background-color: lightgrey;'>\n" +
+                                   "<p onclick='jumpvideo(this," + "\"" + data[i]['txt'] + "\"" + ");' class='videotext' >" + data[i]['txt'] + "</p>\n" +
+                                   "<p class='videotext' style='color:grey;'>评论中回复了" + s + "</p>\n" +
+                                   "</div>\n" +
+                                   "</div>\n" +
+                                   "</div>";
+                               $("#liuyan").append(str);
+                           }
+                           else if (data[i]['active'] == "1") {
+                               var str = "<div onclick='changeactive(this," + "\"" + data[i]['top'] + "\"" + ")' class= 'rows'>\n" +
+                                   "<div style='margin-top: -10px;' class='col-md-1'>\n" +
+                                   "<img  onclick='jumpother(this," + "\"" + data[i]['username'] + "\"" + ");' class='headimg'  src='" + data[i]['img'] + "'>\n" +
+                                   "<p class='circ'>●</p>\n" +
+                                   "</div>\n" +
+                                   "<div  style='margin-top: -10px;' class='col-md-11'>\n" +
+                                   "<p  onclick='jumpother(this," + "\"" + data[i]['username'] + "\"" + ");' class='username'>" + data[i]['username'] + "</p>\n" +
+                                   "<p class='time'>" + data[i]['time'] + "</p>\n" +
+                                   "<p onclick='jumpmessages(this," + "\"" + data[i]['txt'] + "\"" + ");' class='content' >" + data[i]['content'] + "</p>\n" +
+                                   "<div class='row' style='height:33px;margin-left:2px;border-radius:10px;width:90%;margin-top:25px;background-color: lightgrey;'>\n" +
+                                   "<p onclick='jumpvideo(this," + "\"" + data[i]['txt'] + "\"" + ");' class='videotext' >" + data[i]['txt'] + "</p>\n" +
+                                   "<p class='videotext' style='color:grey;'>评论中回复了" + s + "</p>\n" +
+                                   "</div>\n" +
+                                   "</div>\n" +
+                                   "</div>";
+                               $("#liuyan").append(str);
+
+                           }
+                       }
+				   }
+
+                   if(pagel%3!=0){
+                       total= Math.ceil(pagel/3);
+				   }
+				   else{
+                       total=pagel/3;
+				   }
+           }
+		   });
+            $("#page").Page({
+
+                totalPages: total,//分页总数
+                liNums: total,//分页的数字按钮数(建议取奇数)
+                activeClass: 'activP', //active 类样式定义
+                callBack : function(page){
+
+                    $.ajax({
+                        url:"User/findmessagetell.do",
+                        type:"post",
+                        data:{
+                            "username": document.getElementById("session").value
+                        },
+                        async:false,
+                        success:function (data) {
+
+                            $("#liuyan").empty();
+
+                          if(page*3>data.length){
+
+                              z=(data.length);
+
+						  }
+						  else if(page*3<=data.length){
+                              z=page*3;
+						  }
+
+                            for(var i=(page-1)*3;i<z;i++){
+
+
+                     if(data[i]['username']==document.getElementById("session").value) {
+                  var s="自己";
+                     }
+                     else{
+                         var s="你";
+					 }
+
+					 if(data[i]['active']=="0"){
+                         var str="<div onclick='changeactive(this,"+ "\"" + data[i]['top'] + "\""+" )' class= 'rows'>\n" +
+                             "<div style='margin-top: -10px;' class='col-md-1'>\n" +
+                             "<img  onclick='jumpother(this,"+ "\"" + data[i]['username'] + "\"" +");' class='headimg'  src='"+ data[i]['img']+"'>\n" +
+                             "<p class='circs'>●</p>\n" +
+                             "</div>\n" +
+                             "<div  style='margin-top: -10px;' class='col-md-11'>\n" +
+                             "<p  onclick='jumpother(this,"  + "\"" + data[i]['username'] + "\"" +");' class='username'>"+data[i]['username']+ "</p>\n" +
+                             "<p class='time'>"+data[i]['time']+"</p>\n" +
+                             "<p onclick='jumpmessages(this,"+ "\"" + data[i]['txt'] + "\""+");' class='content' >"+data[i]['content']+"</p>\n" +
+                             "<div class='row' style='height:33px;margin-left:2px;border-radius:10px;width:90%;margin-top:25px;background-color: lightgrey;'>\n" +
+                             "<p onclick='jumpvideo(this,"+ "\"" + data[i]['txt'] + "\""+");' class='videotext' >"+data[i]['txt']+"</p>\n" +
+                             "<p class='videotext' style='color:grey;'>评论中回复了"+s+"</p>\n" +
+                             "</div>\n" +
+                             "</div>\n" +
+                             "</div>";
+                         $("#liuyan").append(str);
+					    }
+					    else if(data[i]['active']=="1"){
+                         var str="<div onclick='changeactive(this,"+ "\"" + data[i]['top'] + "\""+")' class= 'rows'>\n" +
+                             "<div style='margin-top: -10px;' class='col-md-1'>\n" +
+                             "<img  onclick='jumpother(this,"+ "\"" + data[i]['username'] + "\"" +");' class='headimg'  src='"+ data[i]['img']+"'>\n" +
+                             "<p class='circ'>●</p>\n" +
+                             "</div>\n" +
+                             "<div  style='margin-top: -10px;' class='col-md-11'>\n" +
+                             "<p  onclick='jumpother(this,"  + "\"" + data[i]['username'] + "\"" +");' class='username'>"+data[i]['username']+ "</p>\n" +
+                             "<p class='time'>"+data[i]['time']+"</p>\n" +
+                             "<p onclick='jumpmessages(this,"+ "\"" + data[i]['txt'] + "\""+");' class='content' >"+data[i]['content']+"</p>\n" +
+                             "<div class='row' style='height:33px;margin-left:2px;border-radius:10px;width:90%;margin-top:25px;background-color: lightgrey;'>\n" +
+                             "<p onclick='jumpvideo(this,"+ "\"" + data[i]['txt'] + "\""+");' class='videotext' >"+data[i]['txt']+"</p>\n" +
+                             "<p class='videotext' style='color:grey;'>评论中回复了"+s+"</p>\n" +
+                             "</div>\n" +
+                             "</div>\n" +
+                             "</div>";
+                         $("#liuyan").append(str);
+
+					 }
+
+
+                             }
+
+
+                        }
+                    });
+
+
+
+                }
+            });
+        })
+
+
+
+		var Ocol = Ovideo.getElementsByClassName('col-md-3');
+		var Ourl = Ovideo.getElementsByTagName('img');
+		var Ospan = Ovideo.getElementsByTagName('span');
+		var txt;
+		for (var i = 0; i < Ospan.length; i++) {
+			Ocol[i].index = i;
+			Ospan[i].index = i;
+			Ospan[i].onclick = function() {
+				var h = this.index;
+				txt = $(Ocol[h]).find("h1").html();
+				var msg = "是否删除收藏？";
+				if (confirm(msg) == true) {
+					$.ajax({
+								url : 'User/deleteCollect.do',
+								type : "post",
+								data : {
+									"session" : document
+											.getElementById("session").value,
+									"txt" : txt
+								},
+								async : false,
+								success : function(data) {
+
+
+										window.location.reload();
+								},
+								error : function(data) {
+									alert("collect不到");
+								}
+							});
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+
+	};function  totals(){
+        $.ajax({
+            url:"User/messagesremind.do",
+            type:"post",
+            data:{
+                "username":document.getElementById("session").value
+            },
+            async:true,
+            success : function(data) {
+                if(data=="0"){
+                    $("#total").text("");
+                }
+                else{
+                    $("#total").text(data);
+                    console.log(data);
+                }
+            }
+        });
+
+    }
+	function changeactive(e,id){
+
+        $.ajax({
+            url : 'User/readmessage.do',
+            type : "post",
+            data : {
+                "findid" : id
+            },
+            async : false,
+            success : function(data) {
+
+                $(e).find(".circs").css('color','white');
+                totals();
+            },
+            error : function(data) {
+                alert("collect不到");
+            }
+        });
+
+
+	}
+	function  jumpvideo(e,text) {
+        $
+            .ajax({
+                url : 'User/playback.do',
+                type : "post",
+                aynac:false,
+                data : {
+                    "text" : text
+                },
+
+                async : false,
+                success : function(data) {
+
+
+                    url = "http://localhost:8080/xuenian/video1.html?id="+data;
+                    totals();
+                    window.open(url);
+
+                },
+                error : function(data) {
+
+                }
+            });
+		
+    }
+</script>

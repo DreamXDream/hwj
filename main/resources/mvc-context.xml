@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	<!-- 本配置文件是名为mvc-context.xml的dispatcherServlet使用，提供其相关的spring MVC配置 -->
+	<!-- 注解驱动 ,可以将请求参数绑定到控制器参数 -->
+
+	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/resource/**" location="/resource/" />
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 拦截所有URL中包含/user/的请求 -->
+			<mvc:mapping path="/User/getadminsession.do"/>
+			<bean class="controller.AdminInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<!-- 拦截所有URL中包含/user/的请求 -->
+			<mvc:mapping path="/User/cookies1.do"/>
+			<bean class="controller.AdminInterceptors"></bean>
+		</mvc:interceptor>
+
+
+	</mvc:interceptors>
+
+
+
+	<mvc:annotation-driven /> <!-- 注解适配器 -->
+	<mvc:default-servlet-handler />
+	<!--包扫描器 -->
+
+
+
+	<!-- 原本是一个handler一个bean 实际开发用scan扫描 -->
+	<context:component-scan base-package="controller" />
+	<context:component-scan base-package="Mapper" />
+	<context:component-scan base-package="Service" />
+	<context:component-scan base-package="domain" /><!-- 开启注解扫描
+		到包里扫描是否有类，属性，方法注解 -->
+	<!-- 配置文件上传类型解析器 multipartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置上传文件最大尺寸，单位为B -->
+		<property name="maxUploadSize" value="200971520" />
+	</bean>
+
+	<!-- 视图解析器 -->
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/"></property> <!-- 配置视图前缀 -->
+		<property name="suffix" value=".html"></property><!-- 配置视图后缀 -->
+
+	</bean>
+
+
+
+</beans>

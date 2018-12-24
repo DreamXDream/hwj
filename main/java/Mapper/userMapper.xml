@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Mapper.UserMapper">
+	<insert id="save" parameterType="String">
+		insert into
+		t_user(username,password,email,active) values(#{0},#{1},#{2},#{3})
+	</insert>
+
+	<select id="findvideotext" resultType="domain.Video">
+		select  * from t_video where
+		text=#{0};
+	</select>
+
+	<select id="findByusername" resultType="domain.User">
+		select *from t_user where
+		username=#{0} and password =#{1};
+	</select>
+
+
+	<select id="findByusernames" resultType="domain.User">
+		select *from t_user where
+		email=#{0} and password =#{1};
+	</select>
+
+
+	<select id="findemail" resultType="domain.User">
+		select *from t_user where
+		email=#{0};
+	</select>
+
+	<select id="findemails" resultType="domain.User">
+		select * from t_user where
+		username=#{1} and email=#{0};
+	</select>
+
+	<select id="findmail1" resultType="String">
+		select username from t_user where
+		email=#{0};
+	</select>
+
+
+	<select id="findByadmin" resultType="domain.User">
+		select *from t_admin where
+		username=#{0} and password=#{1};
+	</select>
+
+	<select id="adminexist" resultType="domain.User">
+		select *from t_admin where
+		username=#{0} ;
+	</select>
+
+
+
+
+	<select id="searchvideo" parameterType="String" resultType="domain.Video">
+		select * from t_video
+		<where>
+			<if test="_parameter!=null">
+				text like CONCAT('%', #{_parameter} , '%')
+			</if>
+		</where>
+	</select>
+
+
+
+	<select id="playback" resultType="Integer">
+		select playback from t_video
+		where text=#{0} ;
+	</select>
+
+	<select id="selectmessage" resultType="domain.Person">
+		select * from t_message
+		where username=#{username} ;
+	</select>
+
+	<select id="findvideo" resultType="domain.Video">
+		select * from t_video;
+	</select>
+
+	<select id="findleavemessage" resultType="domain.Leavemessage">
+		select * from
+		t_leavemessage where txt=#{txt} ;
+	</select>
+
+
+
+	<select id="findrepeatmessage" resultType="domain.RepeatMessage">
+		select * from
+		t_repeatmessage ;
+	</select>
+
+	<select id="findadmin" resultType="domain.User">
+		select * from t_admin where username!=#{admin} ;
+	</select>
+
+	<select id="findUser" resultType="domain.User">
+		select * from t_user ;
+	</select>
+
+	<select id="updataadmin" resultType="domain.User">
+		select * from t_admin where
+		id =#{id};
+	</select>
+
+	<select id="findmessageimg" resultType="String">
+		select img from t_message
+		where username =#{username};
+	</select>
+
+
+	<insert id="saveadmin" parameterType="User">
+		insert into
+		t_admin(username,password) values(#{username},#{password});
+	</insert>
+
+
+	<delete id="deleteleavemessage" parameterType="domain.Leavemessage">
+		DELETE FROM t_leavemessage  WHERE
+		id=#{id}
+	</delete>
+
+	<delete id="deleteadmin" parameterType="Integer">
+		DELETE FROM t_admin WHERE
+		id=#{id}
+	</delete>
+
+
+	<delete id="deleteuser" parameterType="String">
+
+		DELETE FROM t_user WHERE
+		username=#{id}
+	</delete>
+
+	<update id="updataadmin1" parameterType="domain.User">
+		update t_admin set
+		username=#{1} , password=#{2} where id=#{0}
+	</update>
+
+
+	<update id="updatavideo" parameterType="domain.Video">
+		update t_video set
+		text=#{1} , classify=#{2},playback=#{3} where id=#{0}
+	</update>
+
+	<update id="updataemail" parameterType="domain.User">
+		update t_user set
+		active=#{0} where email=#{1}
+	</update>
+
+
+	<update id="updatavideotime" parameterType="domain.Video">
+		update  t_video set
+		vtime=#{1} where videoid=#{0}
+	</update>
+
+
+
+	<update id="updatapasswords" parameterType="domain.User">
+		update t_user set
+		password=#{1} where username=#{0}
+	</update>
+
+
+	<update id="updataplayback" parameterType="domain.Video">
+		update t_video set
+		playback=playback+1 where text=#{0}
+	</update>
+
+
+	<insert id="setimg" parameterType="String">
+		insert into
+		t_video(text,murl,vurl,time,vtime,playback,videoid,classify) values (#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})
+	</insert>
+
+	<insert id="leavemessage" parameterType="String">
+		insert into
+		t_leavemessage(username,message,time,img,txt) values
+		(#{0},#{1},#{2},#{3},#{4})
+	</insert>
+
+
+	<insert id="repeatmessage" parameterType="domain.RepeatMessage">
+		insert into
+		t_repeatmessage(id,username,nickname,content,time,txt,img,active) values
+		(#{0},#{1},#{2},#{3},#{4},#{5},#{6},#{7})
+	</insert>
+
+
+	<update id="imgchange" parameterType="domain.Person">
+		update t_message set
+		img=#{1}, imgname=#{2}  where username=#{0}
+	</update>
+
+
+
+	<select id="findimg" resultType="String">
+		select imgname from t_message
+		where username =#{imgsetname};
+	</select>
+
+	<select id="selectvideosrc" resultType="String">
+		select videoid from t_video
+		where text =#{text};
+	</select>
+
+	<select id="getVideotext" resultType="String">
+		select text from t_video
+		where videoid =#{videoid};
+	</select>
+
+	<select id="messagestotal" resultType="domain.RepeatMessage">
+		select * from t_repeatmessage
+		where active =#{1} and nickname=#{0};
+	</select>
+
+
+	<select id="findmessagetell" resultType="domain.RepeatMessage">
+		select * from t_messagestell
+		where  nickname=#{0};
+	</select>
+
+	<delete id="deletevideosrc" parameterType="domain.Video">
+		delete from t_video WHERE
+		text=#{text}
+	</delete>
+
+	<select id="getleavemessage" resultType="domain.Leavemessage">
+		select * from t_leavemessage  ;
+	</select>
+
+
+
+
+	<select id="findcollectall" resultType="domain.Person">
+		select collect from t_message ;
+	</select>
+
+	<select id="findcollect" resultType="domain.Person">
+		select collect from
+		t_message where username =#{username};
+	</select>
+
+	<select id="findcollect1" resultType="domain.Video">
+		SELECT * from t_video
+		WHERE text in
+		<foreach collection="p1" item="name" open="(" close=")"
+			separator=",">
+			#{name}
+		</foreach>
+	</select>
+
+
+	<update id="collect" parameterType="domain.Person">
+
+		update t_message set
+		collect=#{1} where username=#{0}
+
+	</update>
+
+
+	<update id="readmessage" parameterType="domain.RepeatMessage">
+
+		update t_repeatmessage set
+		active=#{0} where top=#{1}
+
+	</update>
+
+
+	<update id="submitmessage" parameterType="domain.Person">
+		update t_message set
+		name=#{1},job=#{2},sex=#{3},sign=#{4} where
+		username=#{0}
+	</update>
+	<insert id="insertnewUser" parameterType="String">
+		insert into t_message
+		(username, name, job, sex, sign,img,collect)
+		values(#{0},#{1},#{2},#{3},#{4},#{5},#{6});
+	</insert>
+
+</mapper>

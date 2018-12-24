@@ -1,0 +1,72 @@
+html, body {
+    font-family:微软雅黑;
+
+    height: 100%;
+    background-color:white;
+}
+
+#liuyan {
+    background-image: url(images/star.jpeg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+}
+
+#collect {
+    color: white;
+}
+
+#collect:hover {
+    cursor: pointer;
+    color: red;
+}
+
+#append {
+    color: white;
+}
+
+#append:hover {
+    cursor: pointer;
+    color: red;
+}
+
+#download {
+    color: white;
+}
+
+#download:hover {
+    cursor: pointer;
+    color: red;
+}
+
+#video-list h1 {
+    font-size: 20px;
+}
+
+#video- list div {
+    border: 1px grey solid;
+    margin-left: 15px;
+}
+
+.row div {
+    margin-top: 15px;
+}
+
+.row {
+    margin-top: 15px;
+}
+
+#top div a {
+    text-decoration: none;
+    font-size: 1.3em;
+}
+
+#top div {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+#video-list div:hover {
+    border: 1px blue solid;
+    cursor: pointer
+}

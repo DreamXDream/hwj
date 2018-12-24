@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--设置别名-->
+	<typeAliases>
+	<!-- 设置单个别名 mapper中domain可以用d代替  <typeAlias type="domain" alias="d"></typeAlias>-->
+
+			<typeAlias alias="User" type="domain.User"/>
+		<typeAlias alias="User" type="domain.Cookies"/>
+		<typeAlias alias="User" type="domain.Leavemessage"/>
+		<typeAlias alias="User" type="domain.Person"/>
+		<typeAlias alias="User" type="domain.Video"/>
+	<!-- 批量定义别名 ，指定报名 mybatis自动扫描包中的类 别名就是类名（首字母大写小写都可以） -->
+	</typeAliases>
+	
+<!-- 映射包的配置-->
+	<mappers>
+	<!-- 单个映射文件的加载 -->
+		<mapper resource="Mapper/userMapper.xml" />
+		
+		<!-- 批量加载映射文件  但要映射文件和接口在同一路径	<package name="Mapper" />-->
+		
+	</mappers>
+</configuration>

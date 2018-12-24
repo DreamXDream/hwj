@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title></title>
+
+<link href="resource/bootstrap.css" rel="stylesheet" />
+
+<link href="resource/font-awesome.css" rel="stylesheet" />
+
+<link href="resource/assets/css/custom-styles.css" rel="stylesheet" />
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
+
+
+	<link rel="stylesheet" href="resource/bootstrap-table-master/src/bootstrap-table.css" />
+	<link rel="stylesheet" href="resource/clock/css/style.css">
+	<script src="resource/jquery-2.1.4.min.js"></script>
+	<script src="resource/bootstrap.js"></script>
+	<script src="resource/bootstrap-table-master/src/bootstrap-table.js"></script>
+	<script src="resource/bootstrap-table-master/tableExport.js"></script>
+	<script src="resource/bootstrap-table-master/jquery.base64.js"></script>
+	<script src="resource/bootbox.min.js"></script>
+	<script src="resource/jquery.blockUI.js"></script>
+
+	<script src="resource/jquery.metisMenu.js"></script>
+	<script src="//imgcache.qq.com/open/qcloud/js/vod/sdk/ugcUploader.js"></script>
+
+<style>
+boay, html {
+	padding: 0;
+	margin: auto;
+
+}
+
+
+.container {
+	margin-top: 50px;
+}
+
+
+
+
+
+#Operson .col-md-3 {
+	border: 1px solid transparent;
+	margin-left: 15px;
+	margin-top: 15px;
+	margin-bottom: 25px;
+}
+
+#page-wrapper {
+	background-attachment: fixed;
+	overflow: hidden;
+	background-image: url(images/console.jpg);
+	background-repeat: no-repeat;
+	background-size: 100% 800px;
+	height:800px;
+
+
+}
+
+#video-up {
+	display: none;
+}
+#lesson .col-md-3:hover {
+	cursor: pointer;
+}
+
+#lesson .col-md-3 img {
+	width: 100%;
+	height: 140px;
+	position: relative;
+}
+#lesson .col-md-3  {
+	margin-top: 35px;
+}
+
+#lesson .col-md-3 div {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.4);
+	top: 120px;
+	right: 15px;
+	color: white;
+}
+
+#lesson .col-md-3 h1 {
+	overflow: hidden;
+	font-size: 20px;
+	line-height: 25px;
+	display:inline-block;
+	width:100%;
+	height:25px;
+color: black;
+
+
+}
+
+#lesson .col-md-3 h1:hover {
+	color: blue;
+	cursor: pointer
+}
+.col-md-3 span:nth-child(3) {
+	opacity: 0.1;
+	right: 15px;
+	position: absolute;
+	font-size: 25px;
+}
+
+.col-md-3 span:nth-child(3):hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
+</style>
+</head>
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default top-navbar"
+			style="background-color: grey;" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+					<input id="adminsession" type="hidden"></button>
+				</button>
+				<a class="navbar-brand" href="#"><i class="fa fa-comments"></i>
+					<strong id="welcome"></strong></a>
+			</div>
+
+			<ul class="nav navbar-top-links navbar-right">
+
+
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> 课程
+
+								</div>
+						</a></li>
+
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> 视频
+
+								</div>
+						</a></li>
+
+
+
+
+					</ul> <!-- /.dropdown-alerts --></li>
+				<!-- /.dropdown -->
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#" aria-expanded="false"> <i
+						class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+				</a>
+					<ul class="dropdown-menu dropdown-user">
+
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="fa fa-sign-out fa-fw"></i>
+								Logout</a></li>
+					</ul> <!-- /.dropdown-user --></li>
+				<!-- /.dropdown -->
+			</ul>
+		</nav>
+		<!--/. NAV TOP  -->
+		<nav class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul id="list" class="nav" id="main-menu">
+
+					<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+
+					<li><a href="#"><i class="fa fa-desktop"></i> 上传视频</a></li>
+					<li><a href="#"><i class="fa fa-bar-chart-o"></i> 查看视频</a></li>
+					<li><a href="#"><i class="fa fa-qrcode"></i> 管理员添加 </a></li>
+					<li><a href="#"><i class="fa fa-qrcode"></i> 管理员查看</a></li>
+					<li><a href="#"><i class="fa fa-qrcode"></i> 管理员修改</a></li>
+					<li><a href="#"><i class="fa fa-qrcode"></i> 查看用户</a></li>
+					<li><a href="#"><i class="fa fa-qrcode"></i> 视频信息</a></li>
+					<li><a href="#"><i class="fa fa-qrcode"></i> 留言信息</a></li>
+					<li id="ebackstage"><a href="#"><i
+							class="fa fa-fw fa-file"></i>退出</a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<!-- /. NAV SIDE  -->
+	<div id="page-wrapper">
+		<div id="head"  style="position:fixed;display: none;" class="container" >
+
+       <div class="container text-center" style="font-family:'微软雅黑'; color: white; font-size: 30px;"> 欢迎使用后台管理系统!</div>
+			<div class="containerd">
+				<div class="clock">
+					<div class="side">
+						<div class="line"></div>
+					</div>
+					<div class="side">
+						<div class="line"></div>
+						<div class="glas">
+							<h1>clOck</h1>
+							<p>dailycssimages</p>
+							<div class="reflex"></div>
+							<div class="t-hours">
+								<div class="tick-hour"></div>
+							</div>
+							<div class="t-mins">
+								<div class="tick-min"></div>
+							</div>
+							<div class="t-secs">
+								<div class="tick-sec"></div>
+							</div>
+							<div class="alarm"> </div>
+						</div>
+						<ul class="secs">
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+						<ul class="mins">
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+						<ul class="min">
+							<li><span>12</span></li>
+							<li><span>11</span></li>
+							<li><span>10</span></li>
+							<li><span>9</span></li>
+							<li><span>8</span></li>
+							<li><span>7</span></li>
+							<li><span>6</span></li>
+							<li><span>5</span></li>
+							<li><span>4</span></li>
+							<li><span>3</span></li>
+							<li><span>2</span></li>
+							<li><span>1</span></li>
+						</ul>
+					</div>
+					<div class="side">
+						<div class="button"></div>
+					</div>
+					<div class="side">
+						<div class="line"></div>
+					</div>
+					<div class="side">
+						<div class="line"></div>
+					</div>
+					<div class="side"></div>
+					<div class="shadow"></div>
+				</div>
+			</div>
+
+
+
+
+
+		</div>
+
+		<div id="video-up" style="    position:fixed; margin-top: 50px;" class="container">
+			<div id="formsub"  enctype="multipart/form-data"
+				role="form">
+				<div class="form-group">
+					<label for="name">名称</label> <input style="width:400px" name="text" type="text"
+						class="form-control" id="name" placeholder="请输入名称">
+				</div>
+				<video style="display:none;" controls="controls" id="aa" oncanplaythrough="myFunction(this)">
+				</video>
+
+				<label for="name">选择分类</label>
+				<select id="classify" style="width:200px" class="form-control">
+					<option >运动</option>
+					<option >影视</option>
+					<option >娱乐</option>
+					<option >科技</option>
+				</select>
+  <br>
+
+				<div class="form-group">
+					<label for="uploadImgNow-file">图片路径</label> <input type="file" name="file"
+					id="uploadImgNow-file" > <br> <label for="uploadVideoNow-file">视频路径</label>
+
+					<input type="file" id="uploadVideoNow-file"   name="videofile">
+					<input  style="display: none;" type="text" name="vtime" value=""  id="getDuration"/>
+					<p class="help-block">请确认上传的格式正确。</p>
+				</div>
+
+				<button id="subv">上传视频</button>
+				<input id="time" type="hidden" value="">
+
+			</div>
+		</div>
+
+
+		<div id="lesson" style="position:fixed; display: none;" class="container">
+
+			<table style="color:#bce8f1;table-layout: fixed;" id="reportTabled"></table>
+
+		</div>
+
+		<div id="person" style="position:fixed;display: none;" class="container">
+
+			<div class="form-horizontal">
+				<div class="page-header">
+					<h1 style="color: white" class="text-center">添加管理员</h1>
+				</div>
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">用户名:</lable>
+					<div class="col-sm-8 has-success has-feedback">
+
+						<input type="text" id="username" name="username"
+							placeholder="Input your account" class="form-control"> <span
+							class="glyphicon glyphicon-user form-control-feedback"></span>
+
+					</div>
+				</div>
+
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+					<div class="col-sm-8 has-warning has-feedback">
+
+						<input name="password" id="password" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+					<div class="col-sm-8 has-error has-feedback">
+
+
+						<input id="password1" name="password1" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+				<div style="margin-top: 40px; margin-left: -60px;"
+					class="form-group  text-center">
+					<input id="up" type="submit" name="sub" style="width: 120px"
+						value="OK" class="btn btn-primary"> <input type="button"
+						style="margin-left: 30px; width: 120px" value="Cancel"
+						class="btn btn-primary">
+				</div>
+			</div>
+		</div>
+
+		<div id="check" style="position:fixed;display: none; margin-top: 40px;"
+			class="container">
+			<div class="page-header">
+				<h1 style="color: white" class="text-center">查看管理员</h1>
+			</div>
+
+			<table id="table" class="table table-bordered table-hover ">
+				<tr>
+					<td>ID</td>
+					<td>用户名</td>
+					<td>密码</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+
+
+		<div id="updata" class="container" style="position:fixed;display: none;">
+			<div class="form-horizontal">
+
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">ID:</lable>
+					<div class="col-sm-8 has-warning has-feedback">
+
+						<input readonly="readonly" value="" name="id" id="id" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">用户名:</lable>
+					<div class="col-sm-8 has-warning has-feedback">
+
+						<input value="" name="username" id="dusername" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+
+				<div style="margin-top: 40px;" class="form-group">
+					<lable for="" style="color:white" class="col-sm-2 control-label">密码:</lable>
+					<div class="col-sm-8 has-error has-feedback">
+
+
+						<input value="" id="dpassword" name="password" type="text"
+							placeholder="Input your password" class="form-control"> <span
+							class="glyphicon glyphicon-star form-control-feedback"></span>
+
+					</div>
+				</div>
+				<div style="margin-top: 40px; margin-left: -60px;"
+					class="form-group  text-center">
+					<input id="sub" type="submit" name="sub" style="width: 120px"
+						value="确定" class="btn btn-primary"> <input type="button"
+						style="margin-left: 30px; width: 120px" value="取消"
+						class="btn btn-primary">
+				</div>
+			</div>
+
+		</div>
+
+		<div id="checkuser" style="position:fixed;display: none; margin-top: 40px;"
+			 class="container">
+			<div class="page-header">
+				<h1 style="color: white" class="text-center">查看用户</h1>
+			</div>
+
+			<table id="tables" class="table table-bordered table-hover ">
+				<tr>
+					<td>ID</td>
+					<td>用户名</td>
+					<td>密码</td>
+
+					<td></td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="videomessage" style="position:fixed;display: none; margin-top: 20px;"
+			 class="container">
+
+				<table style="color:#bce8f1;table-layout: fixed;" id="reportTable"></table>
+
+
+		</div>
+		<div   style="display: none;position:fixed;"  id="leavemessage" class="container">
+
+
+				<table style="color:#bce8f1;table-layout: fixed;" id="reportTables"></table>
+
+
+
+		</div>
+	</div>
+
+
+
+	<!-- /. WRAPPER  -->
+</body>
+</html>
+<script>
+    var id;
+    var text;
+    var murl;
+    var vurl;
+    var time;
+    var vtime;
+    var playback;
+    var classifyd;
+    var vid;
+    var usernamed;
+	window.onload = function() {
+		var operson = document.getElementById('person');
+		var Olist = document.getElementById('list');
+		var Oli = Olist.getElementsByTagName('li');
+		var Ovideo = document.getElementById('video-up');
+		var ohead=document.getElementById('head');
+		var olesson = document.getElementById('lesson');
+		var ocheck = document.getElementById('check');
+		var oupdata = document.getElementById('updata');
+        var ocheckuser = document.getElementById('checkuser');
+		var oebackstage = document.getElementById('ebackstage');
+		var ovideomessage= document.getElementById('videomessage');
+		var oleavemessage=document.getElementById('leavemessage');
+        $.ajax({
+            url : "User/getadminsession.do",
+            type : "post",
+			aysnc:false,
+            success : function(data) {
+                if(data=="er"){
+                    window.location.href="home1.html";
+                }
+                else{
+                    $("#welcome").html(data);
+                    $("#adminsession").val(data);
+				}
+
+
+
+            },
+            error : function(data) {
+                alert("接收不到");
+            }
+
+        });
+		for (var i = 0; i < Oli.length; i++) {
+			Oli[i].index = i;
+
+			Oli[i].onclick = function() {
+				var b = this.index;
+				Ovideo.style.display = 'none';
+				olesson.style.display = 'none';
+				operson.style.display = 'none';
+				ocheck.style.display = 'none';
+				oupdata.style.display = 'none';
+                ohead.style.display = 'none';
+                ocheckuser.style.display = 'none';
+                ovideomessage.style.display = 'none';
+                oleavemessage.style.display = 'none';
+                if(b==0){
+                    ohead.style.display = 'block';
+
+				}
+				if (b == 1) {
+					Ovideo.style.display = 'block';
+				}
+				if (b == 2) {
+
+					olesson.style.display = 'block';
+				}
+				if (b == 3 && $("#adminsession").val()=='admin') {
+					operson.style.display = 'block';
+				}
+                if (b == 3 && $("#adminsession").val()!='admin') {
+                    operson.style.display = 'none';
+                    alert("权限不够！！！");
+                }
+
+				if (b == 4&& $("#adminsession").val()=='admin') {
+					ocheck.style.display = 'block';
+				}
+                if (b == 4&& $("#adminsession").val()!='admin') {
+                    ocheck.style.display = 'none';
+                    alert("权限不够！！！");
+                }
+                if (b == 6) {
+                    ocheckuser.style.display = 'block';
+                }
+
+                if (b == 7) {
+                    ovideomessage.style.display = 'block';
+                }
+                if(b==8){
+                    oleavemessage.style.display = 'block';
+				}
+			};
+
+		}
+
+
+
+		//查看视频
+
+
+
+
+
+
+		//admin查看
+		var otable = document.getElementById('table');
+        var otables = document.getElementById('tables');
+		$
+				.ajax({
+					url : 'User/getadmin.do',
+					type : "post",
+                    data : {
+                        "admin":$("#welcome").html()
+
+                    },
+					dataType : "json",
+					async:false,
+					success:function(data) {
+
+						for (var i = 0; i < data.length; i++) {
+                        if(data[i]['username']!="admin"   ){
+                            str = "<tr><td class='id'>"
+                                + data[i]['id']
+                                + "</td><td>"
+                                + data[i]['username']
+                                + "</td><td>"
+                                + data[i]['password']
+                                + "</td><td><input type='button' class='btn btn-primary'name='updata' value='修改'><input name='delete' value='删除' type='button' style='margin-left:40px;' class='btn btn-danger' name='delete' ></td></tr>";
+
+                            $("#table").append(str);
+						}
+
+
+						}
+
+					}
+				});
+
+
+//查看用户
+        $
+            .ajax({
+                url : 'User/getUser.do',
+                type : "post",
+                dataType : "json",
+                async:false,
+                success:function(data) {
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        str = "<tr><td class='id'>"
+                            + data[i]['id']
+                            + "</td><td>"
+                            + data[i]['username']
+                            + "</td><td>"
+                            + data[i]['password']
+                            + "</td><td><input name='deletes' value='删除' type='button' style='margin-left:40px;' class='btn btn-danger' name='delete' ></td></tr>";
+
+                        $("#tables").append(str);
+
+                    }
+
+                }
+            });
+		//删除admin
+		//jquery无敌  垃圾js
+		$("input[name='delete']")
+				.each(
+						function() {
+							var currentEle = $(this);
+
+							currentEle
+									.click(function() {
+                                        if($("#adminsession").val()!="admin"){
+                                            alert("权限不够！！！！");
+                                        }
+                                        else{
+
+
+										var id = $(this).parent().parent()
+												.find("td:eq(0)").text()//获取点击的input的上一个元素的上一个元素;无敌
+
+										$
+												.ajax({
+													url : "User/deleteadmin.do",
+													type : "post",
+													data : {
+														"id" : id
+
+													},
+													async : false,
+													success : function(data) {
+														console.log(data);
+														if (data == 'Yes') {
+															alert("删除成功");
+															window.location.href = "backstages.html";
+														}
+													}
+												});
+                                        }
+									});
+						});
+		//删除用户
+        $("input[name='deletes']")
+            .each(
+                function() {
+                    var currentEle = $(this);
+
+                    currentEle
+                        .click(function() {
+                            if($("#adminsession").val()!="admin"){
+                                alert("权限不够！！！！");
+                            }
+                            else{
+
+                                var username = $(this).parent().parent()
+                                    .find("td:eq(1)").text()//获取点击的input的上一个元素的上一个元素;无敌
+
+                                $
+                                    .ajax({
+                                        url : "User/deleteuser.do",
+                                        type : "post",
+                                        data : {
+                                            "username" : username
+
+                                        },
+                                        async : false,
+                                        success : function(data) {
+                                            console.log(data);
+                                            if (data == 'Yes') {
+                                                alert("删除成功");
+                                                window.location.href = "backstages.html";
+                                            }
+                                        }
+                                    });
+                            }
+                        });
+                });
+
+		//修改admin
+
+		var dusername = document.getElementById('dusername');
+		var dpassword = document.getElementById('dpassword');
+		var oupdata = document.getElementById('updata');
+		var osub = document.getElementById('sub');
+		var oid = document.getElementById('id');
+		$("input[name='updata']").each(function() {
+			var currentEle = $(this);
+
+			currentEle.click(function() {
+                if($("#adminsession").val()!="admin"){
+                    alert("权限不够！！！！");
+				}
+				else {
+
+
+				var id = $(this).parent().parent().find("td:eq(0)").text()//获取点击的input的上一个元素的上一个元素;无敌
+
+				$.ajax({
+					url : "User/updataadmin.do",
+					type : "post",
+					data : {
+						"id" : id
+
+					},
+					async : false,
+					success : function(data) {
+						for (var i = 0; i < data.length; i++) {
+							oid.value = data[i]['id'];
+							dusername.value = data[i]['username'];
+							dpassword.value = data[i]['password'];
+
+						}
+					}
+				});
+				oupdata.style.display = 'block';
+                Ovideo.style.display = 'none';
+                olesson.style.display = 'none';
+                operson.style.display = 'none';
+                ocheck.style.display = 'none';
+
+                }
+			});
+
+		});
+		osub.onclick = function() {
+
+			var findusername = dusername.value;
+			var findpassword = dpassword.value;
+			var findid = oid.value;
+			$
+					.ajax({
+						url : "User/updataadmin1.do",
+						type : "post",
+						data : {
+							"findid" : findid,
+							"findusername" : findusername,
+							"findpassword" : findpassword
+
+						},
+						async : false,
+						success : function(data) {
+							console.log(data);
+							if (data == 'Yes') {
+								alert("更新成功");
+								window.location.href = "person.html";
+							} else if (data == 'No') {
+
+								alert("更新失败!存在相同用户");
+
+							}
+						}
+					});
+
+		};
+		//添加admin
+		var oup = document.getElementById('up');
+		oup.onclick = function() {
+			var username = document.getElementById('username').value;
+			var password = document.getElementById('password').value;
+			var password1 = document.getElementById('password1').value;
+
+			$
+					.ajax({
+						url : "User/admin.do",
+						type : "post",
+						data : {
+							"username" : username,
+							"password" : password,
+							"password1" : password1
+
+						},
+						async : false,
+						success : function(data) {
+							console.log(data);
+							if (data == 'No') {
+								alert("存入失败");
+							} else if (data == 'Yes') {
+								alert("存入成功");
+								window.location.href = "backstages.html";
+							}
+						}
+					});
+		};
+
+        var mysign="";
+        var getSignature = function(callback) {
+            $.ajax({
+                url : "User/shangchuan.do", //服务器获取客户端上传签名的URL
+                type : "POST",
+                success : function(result) {
+                    //result.returnData.signature为获取到的签名
+                    alert("success!"+result);
+                    mysign=result;
+                    console.log(result);
+                    callback(result);
+                    //callback(result.returnData.signature);
+                }
+            });
+        };
+        var imgFile;
+        var videoFile;
+
+
+
+        $('#uploadImgNow-file').on('change', function(e){
+             imgFile=this.files[0];
+
+            var string=$("#uploadImgNow-file")[0].value;
+            //对路径字符串进行剪切截取
+			console.log(string);
+            var arrays=string.split("\\");
+            //获取文件名，包含后缀
+            var name=arrays[arrays.length-1];
+
+            //为了辨别格式，统一变小写
+            name=name.toLowerCase();
+            if(!(name.endsWith("png")||name.endsWith("jpg")||name.endsWith("jpeg"))) {
+                alert("请上传jpg、jpeg或png格式的图片！");
+                //清理file里的文件内容
+                $("#uploadImgNow-file")[0].value="";
+
+            }
+
+        });
+        $('#uploadVideoNow-file').on('change', function(e){
+             videoFile = this.files[0];
+            var string=$("#uploadVideoNow-file")[0].value;
+            //对路径字符串进行剪切截取
+            console.log(string);
+            var arrays=string.split("\\");
+            //获取文件名，包含后缀
+            var name=arrays[arrays.length-1];
+
+            //为了辨别格式，统一变小写
+            name=name.toLowerCase();
+            if(!(name.endsWith("mp4")||name.endsWith("avi")||name.endsWith("flv"))) {
+                alert("请上传mp4、avi或flv格式的视频！");
+                //清理file里的文件内容
+                $("#uploadVideoNow-file")[0].value="";
+            }
+        });
+
+
+
+               // console.log(url);
+        $("#subv").click(function(){
+            var options=$("#classify option:selected");
+            var classify= options.val();
+            $.blockUI({ message: '    <div>  <img  style="display:inline-block;margin-top:10px;"  src="images/loading.gif" >  <h1 style=" display:inline-block; font-size:20px;">  上传中..</h1></div>',css: { backgroundColor: 'white', color: 'black'  }   });
+
+                var resultMsg = qcVideo.ugcUploader.start({
+                    videoFile : videoFile,
+                    coverFile: imgFile,//封面, 类型为 File
+                    getSignature : getSignature,
+                    allowAudio : 1,
+                    isTranscode: 1,
+                    error: function(result){
+                        $.unblockUI();
+                        console.log('上传失败的文件类型：' + result.type);
+                        console.log('上传失败的原因：' + result.msg);
+                    },
+                    progress: function(result){
+
+                        console.log('上传进度：' + result.curr);
+
+
+
+                    },
+                    finish: function(result){
+
+                        $.unblockUI();
+                        console.log('上传结果的 fileId：' + result.fileId);
+                        console.log('上传结果的视频名称：' + result.videoName);
+                        console.log('上传结果的视频地址：' + result.videoUrl);
+                        console.log('上传结果的封面名称：' + result.coverName);
+                        console.log('上传结果的封面地址：' + result.coverUrl);
+                        var text = document.getElementById('name').value;
+                        $.ajax({
+                            url : "User/addImg.do",
+                            type : "post",
+                            data : {
+                                "text" : text,
+                                "vurl" : result.videoUrl,
+                                "murl" : result.coverUrl,
+                                "videoid":result.fileId,
+                                "classify":classify
+                            },
+                            async : false,
+                            success : function(data) {
+                                if (data == 'Yes') {
+                                    $("#uploadVideoNow-file")[0].value="";
+                                    $("#uploadImgNow-file")[0].value="";
+                                    document.getElementById('name').value="";
+                                    alert("上传成功!");
+
+
+                                } else if (data == 'No') {
+                                    alert("上传失败!");
+                                }
+                            }
+						});
+                    }
+                });
+        });
+
+        oebackstage.onclick = function() {
+            window.location.href = 'home1.html';
+
+            $.ajax({
+                url : 'User/clearadminsession.do',
+                type : "post",
+                dataType : "json",
+                async : false,
+                success : function(data) {
+
+
+
+
+                }
+            });
+
+
+        };
+
+        var datas  = [];
+        var datae=[];
+        $.ajax({
+            url : 'User/videos.do',
+            type : "post",
+            dataType : "json",
+            async : false,
+            success : function(data) {
+
+                      datas=data;
+
+                console.log(datas);
+            }
+        });
+        $.ajax({
+            url : 'User/getleavemessage.do',
+            type : "post",
+            dataType : "json",
+            async : false,
+            success : function(data) {
+
+                datae=data;
+
+                console.log(datae);
+            }
+        });
+
+
+        $(function () {
+            $('#reportTable').bootstrapTable({
+                method: 'get',
+                cache: false,
+                height: 500,
+                striped: false,
+                pagination: true,
+                showRefresh:true,
+                pageSize: 5,
+                pageNumber:1,
+                pageList: [5, 10, 15, 20],  sidePagination:'client',
+                search: true,
+                showColumns: true,
+                showRefresh: true,
+                showExport: false,
+                exportTypes: ['csv','txt','xml'],
+                search: true,
+                clickToSelect: true,
+                onClickRow: function (row) {
+
+                     id=row.id;
+                     text=row.text;
+                     murl=row.murl;
+                     vurl=row.vurl;
+                     time=row.time;
+                     vtime=row.vtime;
+                     playback=row.playback;
+                     classifyd=row.classify;
+                     vid=row.videoid;
+                     $('#videotext').val(text);
+                    $('#playback').val(playback);
+                    $("#idfind").val(id);
+                    $("#classifies").val(classifyd);
+                    $("#getvideoid").val(vid);
+
+				},
+				columns:
+                    [
+                        {field:"checked",checkbox:true},
+                        {field:"id",title:"ID",align:"center",valign:"middle",sortable:"true" ,width:100},
+                        {field:"text",title:"标题",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"time",title:"日期",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"vtime",title:"时长",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"playback",title:"播放量",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"videoid",title:"视频id",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"classify",title:"分类",align:"center",valign:"middle",sortable:"true",width:200},
+                        { field: 'Desc',title: '操作',formatter : operateFormatter(datas['name']),width:250 },
+                    ],
+                data:datas,
+            });
+            var s;
+
+
+            function operateFormatter(value, row, index) {
+
+                return [
+
+                    '<button  style="width: 60px;height: 30px;" onclick="a(this);" type="button" class="btn btn-primary btn-xs">修改</button>&nbsp;', '<button  style="width: 60px;height: 30px;" onclick="b(this,vid);" type="button" class="btn btn-primary btn-xs">获取时长</button>&nbsp;', '<button  style="width: 60px;height: 30px;" onclick="c(this);" type="button" class="btn btn-primary btn-xs">删除</button>' ]
+                    .join('');
+            }
+        });
+
+        $(function () {
+            $('#reportTabled').bootstrapTable({
+                method: 'get',
+                cache: false,
+                height: 500,
+                striped: false,
+                pagination: true,
+                showRefresh:true,
+                pageSize: 5,
+                pageNumber:1,
+                pageList: [5, 10, 15, 20],  sidePagination:'client',
+                search: true,
+                showColumns: true,
+                showRefresh: true,
+                showExport: false,
+                exportTypes: ['csv','txt','xml'],
+                search: true,
+                clickToSelect: true,
+
+                columns:
+                    [
+                        {field:"checked",checkbox:true},
+                        {field:"id",title:"ID",align:"center",valign:"middle",sortable:"true" ,width:100},
+                        {field:"text",title:"标题",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"time",title:"日期",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"vtime",title:"时长",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"playback",title:"播放量",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"videoid",title:"视频id",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"classify",title:"分类",align:"center",valign:"middle",sortable:"true",width:200},
+
+                    ],
+                data:datas,
+            });
+
+
+        });
+
+
+        $(function () {
+            $('#reportTables').bootstrapTable({
+                method: 'get',
+                cache: false,
+                height: 500,
+                striped: false,
+                pagination: true,
+                showRefresh:true,
+                pageSize: 5,
+                pageNumber:1,
+                pageList: [5, 10, 15, 20],  sidePagination:'client',
+                search: true,
+                showColumns: true,
+                showRefresh: true,
+                showExport: false,
+                exportTypes: ['csv','txt','xml'],
+                search: true,
+                clickToSelect: true,
+                columns:
+                    [
+                        {field:"checked",checkbox:true},
+                        {field:"id",title:"ID",align:"center",valign:"middle",sortable:"true" ,width:100},
+                        {field:"username",title:"用户",align:"center",valign:"middle",sortable:"true" ,width:100},
+                        {field:"message",title:"内容",align:"center",valign:"middle",sortable:"true",width:200},
+                        {field:"txt",title:"视频标题",align:"center",valign:"middle",sortable:"true",width:350},
+                        {field:"time",title:"日期",align:"center",valign:"middle",sortable:"true",width:200},
+                        { field: 'Desc',title: '操作',formatter : operateFormatters(),width:250 },
+                    ],
+                onClickRow: function (row) {
+
+                    usernamed=row.username;
+
+                },
+                data:datae,
+            });
+
+
+            function operateFormatters(value, row, index) {
+
+                return [
+
+                    '<button  style="width: 60px;height: 30px;" onclick="a1(this);" type="button" class="btn btn-primary btn-xs">删除</button>' ]
+                    .join('');
+            }
+        });
+   	};
+
+
+    var findid="<div style='display: none;' class='form-group'> <label for='name'>视频标题</label><input  id='idfind' type='text' class='form-control'  placeholder='视频标题'></div>";
+    var one="<div class='form-group'> <label for='name'>视频标题</label><input value='' id='videotext' type='text' class='form-control'  placeholder='视频标题'></div>";
+    var two="<div class='form-group'> <label for='name'>播放量</label><input value=''id='playback' type='text' class='form-control'  placeholder='播放量'></div>"
+    var three="<div class='form-group'><label for='name'>选择分类</label><select   id='classifies' class='form-control'><option value='运动'>运动 </option><option value='科技'>科技</option><option>影视</option><option  value='娱乐'>娱乐</option></select></div>";
+    var vids="<div style='display: none;' class='form-group'> <label for='name'>视频标题</label><input  id='getvideoid' type='text' class='form-control'  placeholder='视频标题'></div>";
+
+    var  sh="<form role='form'> "+ findid+ one+two+three+vids+ "</form>";
+
+
+    function c(e){
+
+
+        $.ajax({
+            url : 'User/deleteVideo.do',
+            type : "post",
+            data : {
+                "txt" :  $(e).parent().parent().children().eq(2).text()
+            },
+            async : false,
+            success : function(data) {
+                alert("success to delete!");
+                window.location.reload();
+            },
+            error : function(data) {
+                alert("success to delete!");
+            }
+        });
+
+	}
+
+
+function  a1(e){
+
+
+                $.ajax({
+                    url : 'User/deleteleavemessage.do',
+                    type : "post",
+                    data:{
+                        "idfind":   $(e).parent().parent().children().eq(1).text()
+                    },
+                    dataType : "json",
+                    async : false,
+
+                    success : function(data) {
+                        alert("删除成功！");
+                    },error: function(data) {
+                        alert("删除成功！");
+                        $.ajax({
+                            url : 'User/getleavemessage.do',
+                            type : "post",
+                            dataType : "json",
+                            async : false,
+                            success : function(data) {
+
+
+                                $("#reportTables").bootstrapTable('load', data);
+                            }
+                        });
+
+
+                    }
+                });
+
+
+
+}
+function a(e){
+
+        bootbox.confirm({
+			title:"修改视频信息",
+            message: sh,
+            buttons: {
+                confirm  : {
+                    label: 'Yes',
+                    className: 'btn-success'
+                } ,cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                },
+            },
+            callback: function (result) {
+                if(result) {
+                    $.ajax({
+                        url : 'User/updatavideo.do',
+                        type : "post",
+						data:{
+                            "idfind":    $("#idfind").val(),
+							"videotext":   $('#videotext').val(),
+							"playback":$('#playback').val(),
+							"classifies":  $("#classifies").val()
+						},
+                        dataType : "json",
+                        async : false,
+                        success : function(data) {
+
+
+
+                        },error:function (data) {
+                            $.ajax({
+                                url : 'User/videos.do',
+                                type : "post",
+                                dataType : "json",
+                                async : false,
+                                success : function(data) {
+
+                                    $("#reportTable").bootstrapTable('load', data);
+                                }
+                            });
+
+                        }
+                    });
+                } else {
+                }
+
+            }
+        });
+    }
+
+    function  b(e) {
+alert($(e).parent().parent().children().eq(6).text());
+        $.ajax({
+            url : 'User/getvideotime.do',
+            type : "post",
+            data:{
+                "id":  $(e).parent().parent().children().eq(6).text()
+            },
+            dataType : "json",
+            async : false,
+            success : function(data) {
+                $.ajax({
+                    url : 'User/videos.do',
+                    type : "post",
+                    dataType : "json",
+                    async : false,
+                    success : function(data) {
+
+                        $("#reportTable").bootstrapTable('load', data);
+
+                    }
+                });
+            },error:function(data){
+                $.ajax({
+                    url : 'User/videos.do',
+                    type : "post",
+                    dataType : "json",
+                    async : false,
+                    success : function(data) {
+
+                        $("#reportTable").bootstrapTable('load', data);
+                    }
+                });
+
+		}
+        });
+
+    }
+
+
+</script>

@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 引入播放器 css 文件 -->
+    <link href="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <!-- 如需在IE8、9浏览器中初始化播放器，浏览器需支持Flash并在页面中引入 -->
+    <!--[if lt IE 9]>
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
+    <![endif]-->
+    <!-- 如果需要在 Chrome Firefox 等现代浏览器中通过H5播放hls，需要引入 hls.js -->
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
+    <!-- 引入播放器 js 文件 -->
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+    <!-- 示例 CSS 样式可自行删除 -->
+    <link rel="stylesheet" type="text/css" href="xcConfirm.css"/>
+    <link rel="stylesheet" href="bootstrap.css"/>
+    <script src="jquery-1.9.1.js"></script>
+    <script src="resource//xcConfirm.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="bootstrap.js"/>
+    </script>
+    <style>
+        html, body {
+        font-family:微软雅黑;
+
+        height: 100%;
+        background-color:white;
+    }
+        #liuyan {
+        background-image:url(images/star.jpeg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+    }
+
+        #collect {
+        color:white;
+    }
+
+        #collect:hover {
+        cursor: pointer;
+        color: red;
+    }
+
+        #append {
+        color:white;
+    }
+
+        #append:hover {
+        cursor: pointer;
+        color: red;
+    }
+
+        #download {
+        color: white;
+    }
+
+        #download:hover {
+        cursor: pointer;
+        color: red;
+    }
+
+        #video-list h1 {
+        font-size: 20px;
+    }
+
+        #video-list div {
+        border: 1px grey solid;
+        margin-left: 15px;
+    }
+
+        .row div {
+        margin-top: 15px;
+    }
+
+        .row {
+        margin-top: 15px;
+    }
+
+        #top div a {
+        text-decoration: none;
+        font-size: 1.3em;
+    }
+
+        #top div {
+        margin-top:15px;
+        margin-bottom:15px;
+    }
+
+        #video-list div:hover {
+        border: 1px blue solid;
+        cursor: pointer
+    }
+    </style>
+
+    < title > 无标题文档 < /title>
+
+    <script>
+        window.onload = function () {
+        var ologin = document.getElementById('login');
+        var opersonmessage = document.getElementById('personmessage');
+        var Ovideo = document.getElementById('video-list');
+        var str = '';
+        var OPlay = document.getElementById('video');
+        var session = document.getElementById('session').value;
+
+        $.ajax({
+        url: "User/cookies1.do",
+        type: "post",
+        success: function (data) {
+        document.getElementById("session").value = data;
+        document.getElementById("session").html = data;
+        session = data;
+        alert("接收" + document.getElementById("session").value);
+        $("#load").html("欢迎您!" + data);
+    },
+        error: function (data) {
+        alert("error");
+    }
+    });
+
+
+        //视频列表
+        $("#jumphome").click(function () {
+        window.location.href = "home1.html"
+
+    });
+        $("#jumplesson").click(function () {
+        window.location.href = "lesson.html"
+
+    });
+
+        /*
+                for (var i = 0; i < data.length; i++) {
+                str = "<div class='media'><div class='media-left'><img class='img-circle' style='width:100px; height:100px;' src='" + data[i]['img'] + "' >"
+                + "</div><div class='media-body'><h4 class='media-heading'>"
+                + data[i]['username']
+                + "</h4><p>"
+                + data[i]['message']
+                + "</p><p>"
+                + data[i]['id']
+                + "楼"
+                + "&nbsp;&nbsp;"
+                + data[i]['time']
+                + "发表</p><hr></div></div>";
+                $("#leavemessagefind").append(str);
+            }
+         */
+        //收藏视频
+        $("#collect") .click(function (){
+        if (session == 'null' || session == "") {//!=不为字符串判断
+        window.wxc.xcConfirm("您还未登入哦！",
+        window.wxc.xcConfirm.typeEnum.error);
+    }
+        else {
+        $
+        .ajax({
+        url: 'User/collect.do',
+        type: "post",
+        data: {
+        "session": session,
+        "txt": txt
+    },
+        async: false,
+        success: function (data) {
+        if (data == 'Yes') {
+        alert("收藏成功!");
+
+    } else if (data == "No") {
+        window.wxc
+        .xcConfirm(
+        "已收藏过!",
+        window.wxc.xcConfirm.typeEnum.success);
+    }
+    }
+    });
+    }
+    });
+
+
+
+    };
+    </script>
+    <script>
+        var player = TCPlayer("player-container-id", { // player-container-id 为播放器容器ID，必须与html中一致
+            fileID: "5285890781707654376", // 请传入需要播放的视频filID 必须
+            appID: "1256510878", // 请传入点播账号的appID 必须
+            autoplay: false //是否自动播放
+            //其他参数请在开发文档中查看
+        });
+    </script>
+</head>
+
+<body>
+
+
+<div class="col-md-12 container">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+                </button>
+                <a id="load" class="navbar-brand" href="#"></a>
+            </div>
+            <input id="session" type="hidden" value="">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse"
+                 id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li id="jumphome" class="active"><a>首页 <span
+                            class="sr-only">(current)</span></a></li>
+                    <li id="jumplesson"><a>课程</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                            data-toggle="dropdown" role="button" aria-haspopup="true"
+                                            aria-expanded="false">帮助 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+
+                            <li id="login"><a href="#">登入</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">技术协助</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul style="margin-right: 40px" class=" nav navbar-nav navbar-right">
+
+
+                    <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                            data-toggle="dropdown" role="button" aria-haspopup="true"
+                                            aria-expanded="false"> <img
+                            style="width: 40px; height: 40px; margin-top: -10px;"
+                            class=" img-circle pull-right"
+                            src="../images/alien.jpg"> </span></a>
+                        <ul class="dropdown-menu">
+
+                            <li id="personmessage"><a href="#">个人信息</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li id="exit"><a href="#">退出登入</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">技术协助</a></li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+                <form class=" navbar-form navbar-right ">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</div>
+<br>
+<br>
+<div
+        style="margin-top: 60px; width: 100%; background-image: url(../images/222.jpg);"
+        class="container col-md-12">
+
+    <div style="background-color: black;" class="col-md-9 container">
+
+        <video id="player-container-id" preload="auto" width="856" height="480" playsinline webkit-playinline x5-playinline></video>
+
+    </div>
+
+
+    <div style="height: 35px;" class="container col-md-12 ">
+			<span id="collect" class="col-md-1 glyphicon glyphicon-heart "
+                  style="margin-top: 5px; font-size: 20px;"></span> <span id="append"
+                                                                          class=" col-md-1 glyphicon glyphicon-plus"
+                                                                          style="margin-top: 5px; font-size: 20px;"></span>
+        <span
+                id="download" class="col-md-1 glyphicon glyphicon-film"
+                style="margin-top: 5px; font-size: 20px;"></span>
+
+    </div>
+
+</div>
+
+
+<div id="liuyan" class="container "
+     style="background-color: black; width: 100%;">
+
+    <div>
+        <center>
+            <div id="leavemessage" style="width: 70%;" class="form-group ">
+                <div class="text-center" style="font-size: 25px;">留言内容</div>
+
+
+                <textarea id="message" style="margin-top: 30px;"
+                          class="form-control " rows="6" cols="20"></textarea>
+
+            </div>
+            <button type="button" id="sendmessage"
+                    class="btn btn-default text-center">提交
+            </button>
+        </center>
+    </div>
+
+    <div style="margin-top: 40px;" class="container" id="leavemessagefind">
+        <div class="media">
+            <div class="media-left">
+                <img class="img-circle" style="width: 100px; height: 100px;"
+                     src="../images/alien.jpg">
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">小明</h4>
+                <p>有来过，666666。</p>
+                <p>4楼&nbsp;&nbsp;2017-08-08&nbsp;&nbsp;23:15发表</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center btn-group btn-group-justified">
+        <button style="width: 30%;"
+                class="btn btn-default btn-block text-center">查看更多
+        </button>
+    </div>
+</div>
+
+
+</body>
+</html>

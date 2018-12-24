@@ -1,0 +1,80 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="bootstrap.css" />
+<script src="jquery-1.9.1.js"></script>
+<script src="bootstrap.js" /></script>
+<script src="//imgcache.qq.com/open/qcloud/js/vod/sdk/ugcUploader.js"></script>
+<title>22</title>
+
+</head>
+<body>
+<form id="form1">
+    <input id="uploadVideoNow-file" type="file" />
+    <input id="uploadImgNow-file" type="file" />
+    <button id='subv'>提交视频</button>
+</form>
+
+</body>
+</html>
+<script>
+	    window.onload = function() {
+             var mysign="";
+            var getSignature = function(callback) {
+                $.ajax({
+                    url : "User/shangchuan.do", //服务器获取客户端上传签名的URL
+                    type : "POST",
+                    success : function(result) {
+                        //result.returnData.signature为获取到的签名
+                        alert("success!"+result);
+                        mysign=result;
+                        console.log(result);
+                        callback(result);
+                        //callback(result.returnData.signature);
+                    }
+                });
+            };
+            $('#uploadVideoNow-file').on('change', function(e){
+                var videoFile = this.files[0];
+                $('#uploadImgNow-file').on('change', function(e){
+                var imgFile=this.files[0];
+
+                //console.log(videoFile);
+                //console.log(imgFile);
+                    $("#subv").click(function(){
+
+
+                var resultMsg = qcVideo.ugcUploader.start({
+                    videoFile : videoFile,
+                    coverFile: imgFile,//封面, 类型为 File
+                    getSignature : getSignature,
+                    allowAudio : 1,
+                    isTranscode: 1,
+                    error: function(result){
+                        console.log('上传失败的文件类型：' + result.type);
+                        console.log('上传失败的原因：' + result.msg);
+                    },
+                    progress: function(result){
+                        console.log('上传进度：' + result.curr);
+                    },
+                    finish: function(result){
+
+                        console.log('上传结果的 fileId：' + result.fileId);
+                        console.log('上传结果的视频名称：' + result.videoName);
+                        console.log('上传结果的视频地址：' + result.videoUrl);
+                        console.log('上传结果的封面名称：' + result.coverName);
+                        console.log('上传结果的封面地址：' + result.coverUrl);
+
+                    }
+                });
+                    });
+                    });
+            });
+
+        };
+	
+
+</script>
