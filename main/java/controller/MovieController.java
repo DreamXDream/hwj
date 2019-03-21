@@ -12,8 +12,8 @@ public class MovieController {
     {
 
         TreeMap<String, Object> config = new TreeMap();
-        config.put("SecretId", "AKIDa4OzSjCv42oRODkAYr0ykKiz77wbuPXY");
-        config.put("SecretKey", "yIHyaHrFUXOzlQwsgJl02KZcUnwtkSyJ");
+        config.put("SecretId", "你的腾讯云点播的ID");
+        config.put("SecretKey", "你的腾讯云点播的key");
         config.put("RequestMethod", "GET");
         config.put("DefaultRegion", "gz");
         QcloudApiModuleCenter module = new QcloudApiModuleCenter(new Vod(), config);
